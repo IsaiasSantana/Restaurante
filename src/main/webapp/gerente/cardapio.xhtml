@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Sistema de Restaurante"/>
+		<meta name="author" content="Danilo Ramos"/>
+		<h:outputStylesheet library="css" name="style.css"/> 
+		<title>Gerenciar Cardápio</title>
+	</h:head>
+	<h:body>
+		
+		<header class="head">
+					<table>
+						<tr>
+							<td> <p:graphicImage library="img" name="logo.png" width = "150" height = "150"/></td>
+						<td>
+							<table>
+								<tr>
+									<td><h1>Cantina de Mos Eisley</h1></td>
+								</tr>
+								<tr>
+									<td><p:graphicImage library="img" name="moseisley.png" width = "388" height = "100"/></td>
+								</tr>
+							</table>
+						</td>
+					</tr>				
+				</table>
+		</header>
+		
+		<aside class = "menu_gerente">
+				<h3>Olá Han Solo!</h3>
+				<h4>O que deseja fazer?</h4>
+				<table>
+					<tr>
+						<td><h3>Gerenciar Comandas</h3></td>
+					</tr>
+					<tr>				
+						<td><a href="listaComandasAtivas.jsf">Comandas Ativas</a></td>
+					</tr>
+					<tr>
+						<td><a href="listaComandasInativas.jsf">Comandas Inativas</a></td>
+					</tr>
+					<tr>
+						<td><h3>Gerenciar Pedidos</h3></td>
+					</tr>
+					<tr>				
+						<td><a href="listaPedidos.jsf">Listar Pedidos</a></td>
+					</tr>
+					<tr>
+						<td><h3>Gerencia de Cardápio</h3></td>
+					</tr>
+					<tr>
+						<td><h3>Gerenciar Pessoal</h3></td>
+					</tr>
+					<tr>
+						<td><a href="listarQuadroHorarios.jsf">Listar Quadro de Horários</a></td>
+					</tr>
+					<tr>
+						<td><a href="cadastroQuadroHorario.jsf">Cadastrar Quadro de Horários</a></td>
+					</tr>
+					<tr>
+						<td><a href="cadastrarFuncionario.jsf">Listar Funcionarios</a></td>
+					</tr>
+					<tr>
+						<td><a href="cadastrarFuncionario.jsf">Novo Funcionario</a></td>
+					</tr>
+					
+				</table>
+			</aside>
+		
+			<main>
+				<h1 style="margin-top:0">Gerenciar Cardápio</h1>
+				<div class="pedido">
+				<h:form>
+				<p:messages />
+				<p:dataTable id="cardapioRefeicao" value="#{produtoBean.listaRefeicao}" var="refeicao" 
+					emptyMessage="Nenhuma refeição cadastrada!" >
+						<f:facet name="header">
+         			 	Refeições
+      					 </f:facet>
+						<p:column headerText="Código">
+							<h:outputText value="#{refeicao.idProduto}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{refeicao.nome}" />
+						</p:column>
+						<p:column headerText="Preço">
+							R$: <h:outputText value="#{refeicao.preco}" >
+								<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+							</h:outputText>
+						</p:column>								
+						<p:column headerText="Editar">
+						<h:commandButton value="Editar" action="#{produtoBean.editar}">
+						<f:setPropertyActionListener value="#{refeicao}" target="#{produtoBean.produto}" />
+						</h:commandButton>
+					</p:column>
+					<p:column headerText="Excluir">
+						<h:commandButton value="Excluir" action="#{produtoBean.excluir}" 
+						onclick ="return confirm('Você deseja excluir a refeição selecionada?')">
+							<f:setPropertyActionListener value="#{refeicao}" target="#{produtoBean.produto}" />
+						</h:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:dataTable id="cardapioBebidas" value="#{produtoBean.listaBebida}" var="bebida" 
+					emptyMessage="Nenhum bebida cadastrada!" >
+						<f:facet name="header">
+         			 	Bebidas
+      					 </f:facet>
+						<p:column headerText="Código">
+							<h:outputText value="#{bebida.idProduto}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{bebida.nome}" />
+						</p:column>
+						<p:column headerText="Preço">
+							R$: <h:outputText value="#{bebida.preco}" >
+								<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+							</h:outputText>
+						</p:column>								
+						<p:column headerText="Editar">
+						<h:commandButton value="Editar" action="#{produtoBean.editar}">
+						<f:setPropertyActionListener value="#{bebida}" target="#{produtoBean.produto}" />
+						</h:commandButton>
+					</p:column>
+					<p:column headerText="Excluir">
+						<h:commandButton value="Excluir" action="#{produtoBean.excluir}" 
+						onclick ="return confirm('Você deseja excluir a bebida selecionada?')">
+							<f:setPropertyActionListener value="#{bebida}" target="#{produtoBean.produto}" />
+						</h:commandButton>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			</div>
+			<p:commandButton value="Novo Produto"  action="cadastroProduto">
+					</p:commandButton>
+			</main>
+			
+			
+			
+			<aside class = "login">
+				<form>
+					<table>
+						<tr><td><h1>Perfil</h1></td></tr> <br/>
+						<tr><td><p:graphicImage library="img" name="han.jpg" alt="han solo" width="130" height="160"/></td></tr>
+						<tr><td><b>Nome:</b> Han Solo</td></tr>
+						<tr><td><b>Função:</b> Gerente</td></tr>
+						<tr><td><b>Turno:</b> Diurno</td></tr>
+						<tr><td><b>Entrada:</b> 05:00</td></tr>
+						<tr><td><b>Saida:</b> 00:00</td></tr>
+						
+						<tr><td><p:button target="index.xhtml" value="Logout"/></td></tr>
+					</table>					
+				</form>
+			</aside>
+			
+	</h:body>
+	
+</html>

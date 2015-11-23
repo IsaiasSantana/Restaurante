@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Restaurante</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+
+<!-- 	<p:ajaxStatus styleClass="ajax-status"> -->
+<!-- 		<f:facet name="start"> -->
+<!-- 			<h:graphicImage library="img" name="carregando.gif" /> -->
+<!-- 		</f:facet> -->
+<!-- 		<f:facet name="complete"> -->
+<!-- 			<h:outputText value="" /> -->
+<!-- 		</f:facet> -->
+<!-- 	</p:ajaxStatus> -->
+
+	<header class="head">
+				<table>
+					<tr>
+						<td><h:graphicImage library="img" name="logo.png" width="150" height="150"/></td>
+						<td>
+							<table>
+								<tr>
+									<td><h1>Cantina de Mos Eisley</h1></td>
+								</tr>
+								<tr>
+									<td><h:graphicImage library="img" name="moseisley.png" width="388" height="100" /></td>
+								</tr>
+							</table>
+						</td>
+					</tr>				
+				</table>
+	</header>
+	
+	<div id="conteudo" style="">
+		<ui:insert name="conteudo">
+
+		</ui:insert>
+	</div>
+
+<!-- 	<div id="footer"> -->
+<!-- 		<p>&copy;2015 - Restaurante</p> -->
+<!-- 	</div> -->
+</h:body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Sistema de Restaurante"/>
+		<meta name="author" content="Danilo Ramos"/>
+		<h:outputStylesheet library="css" name="style.css"/> 
+		<title>Parcial Comanda</title>
+	</h:head>
+	<h:body>
+		
+		<header class="head">
+					<table>
+						<tr>
+							<td> <p:graphicImage library="img" name="logo.png" width = "150" height = "150"/></td>
+						<td>
+							<table>
+								<tr>
+									<td><h1>Cantina de Mos Eisley</h1></td>
+								</tr>
+								<tr>
+									<td><p:graphicImage library="img" name="moseisley.png" width = "388" height = "100"/></td>
+								</tr>
+							</table>
+						</td>
+					</tr>				
+				</table>
+		</header>
+		
+		<aside class = "menu">
+				<h3>Olá Han Solo!</h3>
+				<h4>O que deseja fazer?</h4>
+				<table>
+					<tr>
+						<td><h3>Gerencia de Cardápio</h3></td>
+					</tr>
+					<tr>
+						<td><a href="cardapio.jsf">Cardápio</a></td>
+					</tr>
+					<tr>
+						<td><a href="cadastroProduto.jsf">Cadastrar Produto</a></td>
+					</tr>
+					<tr>
+						<td><h3>Gerenciar Comandas</h3></td>
+					</tr>
+					<tr>				
+						<td><a href="listaComandasAtivas.jsf">Comandas Ativas</a></td>
+					</tr>
+					<tr>
+						<td><a href="listaComandasInativas.jsf">Comandas Inativas</a></td>
+					</tr>
+					<tr>
+						<td><h3>Gerenciar Pedidos</h3></td>
+					</tr>
+					<tr>				
+						<td><a href="listaPedidos.jsf">Listar Pedidos</a></td>
+					</tr>
+					<tr>
+						<td><h3>Gerenciar Pessoal</h3></td>
+					</tr>
+					<tr>
+						<td><a href="listarQuadroHorarios.jsf">Listar Quadro de Horários</a></td>
+					</tr>
+					<tr>
+						<td><a href="cadastroQuadroHorario.jsf">Cadastrar Quadro de Horários</a></td>
+					</tr>
+					<tr>
+						<td><a href="cadastrarFuncionario.jsf">Listar Funcionarios</a></td>
+					</tr>
+					<tr>
+						<td><a href="cadastrarFuncionario.jsf">Novo Funcionario</a></td>
+					</tr>
+				</table>
+			</aside>
+		
+			<main>
+				<h1 style="margin-top:0">Parcial da Comanda</h1>
+				<h:form>
+				<p:messages />	
+				  <div class="pedido">
+				 	<p:dataTable id="listaPedidosComanda" value="#{comandaBean.listaPedido}" var="pedido" 
+					emptyMessage="Nenhum pedido cadastrado!" >
+						<f:facet name="header">
+         			 	Comanda de #{comandaBean.comanda.responsavel}
+      					 </f:facet>
+						<p:column headerText="Com." style="width :25px">
+							<h:outputText value="#{pedido.getComanda().idComanda}" />
+						</p:column>
+						<p:column headerText="Cod." style="width :20px">
+							<h:outputText value="#{pedido.idPedido}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{pedido.getProduto().nome}" />
+						</p:column>
+						<p:column headerText="Qntd" style="width :25px">
+							<h:outputText value="#{pedido.getQntd()}" />
+						</p:column>		
+						<p:column headerText="R$" style="width :45px">
+							<h:outputText value="#{pedido.getProduto().preco}" >
+							<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+							</h:outputText>
+						</p:column>	
+						<f:facet name="footer">
+         			 	Total: R$ #{comandaBean.calcularComanda()}
+      					 </f:facet>
+				</p:dataTable>	
+				     </div>
+				    <p:commandButton value="Voltar" update="@form"
+					process="@form"  action="listaComandasAtivas">
+					</p:commandButton>
+					<p:commandButton value="Fechar Comanda" update="@form"
+					process="@form"  action="fecharComanda">
+					<f:setPropertyActionListener value="#{comanda}" target="#{comandaBean.comanda}">
+							</f:setPropertyActionListener>
+					</p:commandButton>
+				</h:form>
+			</main>
+			
+			<aside class = "login">
+				<form>
+					<table>
+						<tr><td><h1>Perfil</h1></td></tr> <br/>
+						<tr><td><p:graphicImage library="img" name="han.jpg" alt="han solo" width="130" height="160"/></td></tr>
+						<tr><td><b>Nome:</b> Han Solo</td></tr>
+						<tr><td><b>Função:</b> Gerente</td></tr>
+						<tr><td><b>Turno:</b> Diurno</td></tr>
+						<tr><td><b>Entrada:</b> 05:00</td></tr>
+						<tr><td><b>Saida:</b> 00:00</td></tr>
+						
+						<tr><td><p:button target="index.xhtml" value="Logout"/></td></tr>
+					</table>				
+				</form>
+			</aside>
+			
+	</h:body>
+	
+</html>

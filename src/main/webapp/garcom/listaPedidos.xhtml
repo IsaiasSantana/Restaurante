@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Sistema de Restaurante"/>
+		<meta name="author" content="Danilo Ramos"/>
+		<h:outputStylesheet library="css" name="style.css"/> 
+		<title>Lista de Pedidos Não Atendidos</title>
+	</h:head>
+	<h:body>
+		
+		<header class="head">
+					<table>
+						<tr>
+							<td> <p:graphicImage library="img" name="logo.png" width = "150" height = "150"/></td>
+						<td>
+							<table>
+								<tr>
+									<td><h1>Cantina de Mos Eisley</h1></td>
+								</tr>
+								<tr>
+									<td><p:graphicImage library="img" name="moseisley.png" width = "388" height = "100"/></td>
+								</tr>
+							</table>
+						</td>
+					</tr>				
+				</table>
+		</header>
+		
+		<aside class = "menu">
+				<h3>Olá Chewbacca!</h3>
+				<h4>O que deseja fazer?</h4>
+				<table>
+					<tr>				
+						<td><a href="listaComandasAtivas.jsf">Comandas Ativas</a></td>
+					</tr>
+					<tr>
+						<td><a href="listaComandasInativas.jsf">Comandas Inativas</a></td>
+					</tr>	
+				</table>
+			</aside>
+		
+			<main>
+				<h1 style="margin-top:0">Lista de Pedidos Não Atendidos</h1>
+				<div class="pedido">
+				<h:form>
+				<p:messages />	
+				  
+				 	<p:dataTable id="listaPedidosBebida" value="#{pedidoBean.listaPedidoBebida}" var="pedidoBebida" emptyMessage="Nenhum pedido cadastrado!" >
+						<f:facet name="header">
+         			 	Bebidas
+      					 </f:facet>
+						<p:column headerText="Cod." style="width :20px">
+							<h:outputText value="#{pedidoBebida.idPedido}" />
+						</p:column>
+						<p:column headerText="Com." style="width :25px">
+							<h:outputText value="#{pedidoBebida.getComanda().idComanda}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{pedidoBebida.getProduto().nome}" />
+						</p:column>
+						<p:column headerText="Qntd" style="width :25px">
+							<h:outputText value="#{pedidoBebida.getQntd()}" />
+						</p:column>		
+						
+						<p:column headerText="Atendido" style="width :50px">
+						 <h:commandButton value=" "  action="#{pedidoBean.marcarAtendido}" >
+							<f:setPropertyActionListener value="#{pedidoBebida}" target="#{pedidoBean.pedido}">
+							</f:setPropertyActionListener>
+						</h:commandButton>
+					</p:column>					
+				</p:dataTable>	
+				</h:form>
+				<h:form>
+				<p:dataTable id="listaPedidosRefeicaoEspera" value="#{pedidoBean.listaPedidoRefeicaoEspera}" var="pedidoRefeicao" 
+					emptyMessage="Nenhum pedido cadastrado!" >
+						<f:facet name="header">
+         			 	Refeições Em Espera
+      					 </f:facet>
+						<p:column headerText="Cod." style="width :20px">
+							<h:outputText value="#{pedidoRefeicao.getProduto().idProduto}" />
+						</p:column>
+						<p:column headerText="Com." style="width :25px">
+							<h:outputText value="#{pedidoRefeicao.getComanda().idComanda}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{pedidoRefeicao.getProduto().nome}" />
+						</p:column>
+						<p:column headerText="Qntd" style="width :25px">
+							<h:outputText value="#{pedidoRefeicao.getQntd()}" />
+						</p:column>							
+				</p:dataTable>	
+				</h:form>
+				<h:form>
+				<p:dataTable id="listaPedidosRefeicaoPreparo" value="#{pedidoBean.listaPedidoRefeicaoPreparo}" var="pedidoRefeicao" 
+					emptyMessage="Nenhum pedido cadastrado!" >
+						<f:facet name="header">
+         			 	Refeições Em Preparo
+      					 </f:facet>
+						<p:column headerText="Cod." style="width :20px">
+							<h:outputText value="#{pedidoRefeicao.getProduto().idProduto}" />
+						</p:column>
+						<p:column headerText="Com." style="width :25px">
+							<h:outputText value="#{pedidoRefeicaoPreparo.getComanda().idComanda}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{pedidoRefeicao.getProduto().nome}" />
+						</p:column>
+						<p:column headerText="Qntd" style="width :25px">
+							<h:outputText value="#{pedidoRefeicao.getQntd()}" />
+						</p:column>		
+				</p:dataTable>	
+				</h:form>
+				<h:form>
+				<p:dataTable id="listaPedidosRefeicaoPronta" value="#{pedidoBean.listaPedidoRefeicaoPronta}" var="pedidoRefeicao" 
+					emptyMessage="Nenhum pedido cadastrado!" >
+						<f:facet name="header">
+         			 	Refeições Prontas!
+      					 </f:facet>
+						<p:column headerText="Cod." style="width :20px">
+							<h:outputText value="#{pedidoRefeicao.getProduto().idProduto}" />
+						</p:column>
+						<p:column headerText="Com." style="width :25px">
+							<h:outputText value="#{pedidoRefeicaoPronta.getComanda().idComanda}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{pedidoRefeicao.getProduto().nome}" />
+						</p:column>
+						<p:column headerText="Qntd" style="width :25px">
+							<h:outputText value="#{pedidoRefeicao.getQntd()}" />
+						</p:column>		
+						<p:column headerText="Atendido" style="width :50px">
+						 <h:commandButton value=" "  action="#{pedidoBean.marcarAtendido}" process="@form"
+							update="@form">
+							<f:setPropertyActionListener target="#{pedidoBean.pedido}" value="#{pedido}" >
+							</f:setPropertyActionListener>
+						</h:commandButton>
+					</p:column>	
+				</p:dataTable>	
+				</h:form>
+				     </div>
+				    <p:commandButton value="Novo Pedido"  action="novoPedido">
+					</p:commandButton>
+					<p:commandButton value="Nova Comanda" action="novaComanda">
+					</p:commandButton>
+			</main>
+			
+			<aside class = "login">
+				<form>
+					<table>
+						<tr><td><h1>Perfil</h1></td></tr> <br/>
+						<tr><td><p:graphicImage library="img" name="chewie.jpg" alt="chewbacca" width="130" height="160"/></td></tr>
+						<tr><td><b>Nome:</b> Chewbacca</td></tr>
+						<tr><td><b>Função:</b> Garçom</td></tr>
+						<tr><td><b>Turno:</b> Noite</td></tr>
+						<tr><td><b>Entrada:</b> 18:00</td></tr>
+						<tr><td><b>Saida:</b> 00:00</td></tr>
+						
+						<tr><td><p:button target="index.xhtml" value="Logout"/></td></tr>
+					</table>					
+				</form>
+			</aside>
+			
+	</h:body>
+	
+</html>

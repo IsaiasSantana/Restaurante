@@ -1,0 +1,111 @@
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+			<h:outputStylesheet library="css" name="style.css" />
+			<h:inputHidden value="#{itemBean.item.idItem}"/>
+			<aside class="menu_gerente">
+				<h3>Olá Greedo!</h3>
+				<h4>O que deseja fazer?</h4>
+				<table>
+					<tr>
+						<td><a href="estoque.html">Retirada de Item </a> <details>
+								<summary>Gerenciar Itens</summary>
+								<table>
+									<tr>
+										<td><h:link value="Visualizar itens"/></td>
+									</tr>
+									<tr>
+										<td><h:link value="Cadastrar item"/></td>
+									</tr>
+								</table>
+							</details></td>
+					</tr>
+					<tr>
+						<td><h:link value="Encomendas"/></td>
+					</tr>
+					<tr>
+						<td><details>
+								<summary>Gerenciar Fornecedores</summary>
+								<table>
+									<tr>
+										<td><h:link value="Listar fornecedor" outcome="listarFornecedor"/></td>
+									</tr>
+									<tr>
+										<td><h:link value="Novo fornecedor" outcome="cadastroFornecedor"/></td>
+									</tr>
+								</table>
+							</details></td>
+					</tr>
+				</table>
+			</aside>
+			<main>
+			<h2>Cadastrar Item</h2>
+			<section class="pedido">
+				<p:messages />
+				<table>
+					<tr>
+						<td><p:outputLabel value="Nome" for="nome" /></td>
+						<td><p:inputText id="nome" value="#{itemBean.item.nomeItem}" required="true" requiredMessage="É nescessário informar o nome do item." size="20" /></td>
+					</tr>
+				
+					<tr>
+						<td><b>Tipo:</b></td>
+						<td><h:selectOneMenu id="Tipo" value="#{itemBean.item.tipoItem}"  required="true" requiredMessage=" É nescessário informar o tipo de item.	">
+						<f:selectItem itemLabel="-- Selecione o tipo --" itemValue="" />
+								<f:selectItem itemLabel="Verduras" itemValue="Verduras" />
+								<f:selectItem itemLabel="Carnes" itemValue="Carnes" />
+								<f:selectItem itemLabel="Condimentos" itemValue="Condimentos" />
+								<f:selectItem itemLabel="Bebidas" itemValue="Bebidas" />
+								<f:selectItem itemLabel="Material de Limpeza" itemValue="Material de Limpeza" />
+							</h:selectOneMenu></td>	
+					</tr>
+					
+					<tr>
+						<td><p:commandButton value="salvar" update="@form"
+								process="@form"  action="#{itemBean.salvar}"/></td>
+					</tr>
+				</table>
+			</section>
+			</main>
+			<aside class="login">
+				<table>
+					<tr>
+						<td><h1>Perfil</h1> <br></br></td>
+					</tr>
+					<tr>
+						<td><h:graphicImage library="img" name="greedo.jpg"
+								width="130" height="160" /></td>
+					</tr>
+					<tr>
+						<td><b>Nome:</b> Greedo</td>
+					</tr>
+					<tr>
+						<td><b>Função:</b> Estoquista</td>
+					</tr>
+					<tr>
+						<td><b>Turno:</b> Tarde</td>
+					</tr>
+					<tr>
+						<td><b>Entrada:</b> 13:00</td>
+					</tr>
+					<tr>
+						<td><b>Saida:</b> 22:00</td>
+					</tr>
+					<tr>
+						<td>ss</td>
+					</tr>
+					<tr>
+						<td><p:commandButton value="Logout" update="@form"
+								process="@form" /></td>
+					</tr>
+				</table>
+			</aside>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

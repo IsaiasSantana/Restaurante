@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Sistema de Restaurante"/>
+		<meta name="author" content="Antonio"/>
+		<h:outputStylesheet library="css" name="style.css"/> 
+		<title>Novo Lote</title>
+	</h:head>
+	<h:body>
+		
+		<header class="head">
+					<table>
+						<tr>
+							<td> <p:graphicImage library="img" name="logo.png" width = "150" height = "150"/></td>
+						<td>
+							<table>
+								<tr>
+									<td><h1>Cantina de Mos Eisley</h1></td>
+								</tr>
+								<tr>
+									<td><p:graphicImage library="img" name="moseisley.png" width = "388" height = "100"/></td>
+								</tr>
+							</table>
+						</td>
+					</tr>				
+				</table>
+		</header>
+		
+		<aside class = "menu">
+				<h3>Olá Chewbacca!</h3>
+				<h4>O que deseja fazer?</h4>
+				<!--<table>
+					 <tr>
+						<td><a href="listaPedidos.jsf">Listar Pedidos</a></td>
+					</tr>
+					<tr>				
+						<td><a href="parcial_comanda.html">Tirar Parcial</a></td>
+					</tr>
+					<tr>
+						<td><a href="fechar_comanda.html">Fechar Comanda</a></td>
+					</tr>	
+				</table>
+				-->
+			</aside>
+		
+			<main>
+				<h1 style="margin-top:0">Novo Lote</h1>
+				<h:form>
+				<p:messages />
+				<h:inputHidden value="#{pedidoBean.pedido.idPedido}"/>
+				  <div class="pedido">
+				  
+				<h:panelGrid columns="2" cellspacing="5" >
+				  <p:outputLabel value="Fornecedores" for="fornecedor"/>
+				 <p:selectOneMenu id="fornecedor"  value="" itemLabel="" required="true" requiredMessage="Informe a comanda a qual o pedido se refere!" >
+								<f:selectItems id="Fornecedor" value="#{fornecedorBean.listaFornecedor}" var="fornecedor" 
+   							 itemLabel="#{fornecedor.nome}" itemValue="#{fornecedor.idFornecedor}"  />
+					       </p:selectOneMenu>
+					 
+				 </h:panelGrid>
+				 
+				 <h:panelGrid columns="2" cellspacing="5" >
+				  <p:outputLabel value="Itens" for="item"/>
+				 <p:selectOneMenu id="item"  value="" itemLabel="" required="true" requiredMessage="Informe a comanda a qual o pedido se refere!" >
+							<f:selectItems id="Item" value="#{itemBean.listaItem}" var="item" 
+   							 itemLabel="#{item.nomeItem}" itemValue="#{item.idItem}"  />
+					       </p:selectOneMenu>
+				 </h:panelGrid>
+				 
+					    <h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5">	
+					        <p:outputLabel value="Quantidade:" for="qntd" />
+					        <p:inputText type="number"  id="qntd" style="width:30px" value="#{pedidoBean.pedido.qntd}" required="true" requiredMessage="Informe a quantidade do produto!" >
+								<f:validateLongRange minimum="1" />
+							</p:inputText>
+							
+					    </h:panelGrid>
+					    
+					    
+					    
+					    <h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5">	
+					        <p:outputLabel value="Data validade" for="data_validade" />
+					        <p:calendar id="data_validade" value="#{lote.validade}" />						
+							<h:outputText value="#{lote.validade}">
+                				<f:convertDateTime pattern="dd/MM/yyyy" />
+            				</h:outputText>
+							 
+							 
+					    </h:panelGrid>
+					    
+		
+				     </div>
+				    <p:commandButton value="Salvar Lote" update="@form"
+					process="@form"  action="#{itemBean.salvar}">
+					</p:commandButton>
+				</h:form>
+			</main>
+			
+			<aside class = "login">
+				<form>
+					<table>
+						<tr><td><h1>Perfil</h1></td></tr> <br/>
+						<tr><td><p:graphicImage library="img" name="chewie.jpg" alt="chewbacca" width="130" height="160"/></td></tr>
+						<tr><td><b>Nome:</b> Chewbacca</td></tr>
+						<tr><td><b>Função:</b> Garçom</td></tr>
+						<tr><td><b>Turno:</b> Noite</td></tr>
+						<tr><td><b>Entrada:</b> 18:00</td></tr>
+						<tr><td><b>Saida:</b> 00:00</td></tr>
+						
+						<tr><td><p:button target="index.xhtml" value="Logout"/></td></tr>
+					</table>					
+				</form>
+			</aside>
+			
+	</h:body>
+	
+</html>

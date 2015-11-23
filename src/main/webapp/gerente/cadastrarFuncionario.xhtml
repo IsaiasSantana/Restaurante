@@ -1,0 +1,149 @@
+<ui:composition template="/WEB-INF/template/templateGerente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+
+			<script>
+				function configurarMoeda() {
+					$(".moeda").maskMoney({
+						decimal : ",",
+						thousands : ".",
+						allowZero : true
+					});
+				}
+
+				$(document).ready(function() {
+					configurarMoeda();
+				});
+			</script>
+
+			<main>
+			<h2>Novo funcionário</h2>
+			<section class="pedido">
+				<p:messages />
+				<table>
+					<tr>
+						<td><p:outputLabel value="Nome " for="nome" /></td>
+						<td><p:inputText id="nome" required="true"
+								requiredMessage="O funcionário deve possuir um nome."
+								value="#{funcionarioBean.funcionario.nome}" /></td>
+					</tr>
+
+					<tr>
+						<td><p:outputLabel value="Cpf" for="cpf" /></td>
+						<td><p:inputMask mask="999.999.999-99" id="cpf"
+								required="true" requiredMessage="Qual o cpf do funcionário ?"
+								value="#{funcionarioBean.funcionario.cpf}" /></td>
+					</tr>
+
+					<tr>
+						<td><p:outputLabel value="Salário base" for="sBase" /></td>
+						<td><p:inputText id="sBase" styleClass="moeda"
+								value="#{funcionarioBean.funcionario.salarioBase}"
+								required="true"
+								requiredMessage="É preciso saber o salário do funcionário.">
+								<f:convertNumber pattern="#,##0.00" locale="pt_BR"
+									maxFractionDigits="2" />
+								<f:validateDoubleRange minimum="400.00" />
+							</p:inputText></td>
+					</tr>
+
+					<tr>
+						<td><p:outputLabel value="Carga horária base" for="chb" /></td>
+						<td><p:inputText id="chb"
+								value="#{funcionarioBean.funcionario.cargaHorariaBase}"
+								required="true"
+								requiredMessage="Qual a carga horária de trabalho do funcionário ?" /></td>
+					</tr>
+
+					<tr>
+						<td><p:outputLabel value="Carga horária trabalhada" for="cht" /></td>
+						<td><p:calendar locale="pt" id="cht"
+								value="#{funcionarioBean.funcionario.cargaHorariaTrabalhada}"
+								pattern="HH:mm" timeOnly="true" required="true"
+								requiredMessage="É nescessário informar a carga horária trabalhada." /></td>
+
+					</tr>
+					
+					<tr>
+						<td><p:outputLabel value="Horas extras" for="horasExtras"/></td>
+						<td><p:calendar locale="pt" id="horasExtras"
+								value="#{funcionarioBean.funcionario.horasExtras}"
+								pattern="HH:mm" timeOnly="true" required="true"
+								requiredMessage="É nescessário informar as horas extras do funcionário." /></td>
+					</tr>
+					
+					<tr>
+						<td><p:outputLabel value="Status contratual" for="statusContrato"/></td>
+						<td>
+							<p:inputText id="statusContrato" value="#{funcionarioBean.funcionario.statusContratual}" required="true">
+								<f:validateDoubleRange minimum="1" />
+							</p:inputText>
+					   </td>
+					</tr>
+					
+					<tr>
+						<td><p:outputLabel value="Tipo do funcionário" for="tipoFunc" /></td>
+						<td><p:selectOneRadio id="tipoFunc"
+								value="#{funcionarioBean.funcionario.categoria}"
+								required="true" requiredMessage="Qual o tipo do funcionário ?">
+								<f:selectItem itemLabel="Garçom" itemValue="garcom" />
+								<f:selectItem itemLabel="Gerente" itemValue="gerente" />
+								<f:selectItem itemLabel="Estoquista" itemValue="estoquista" />
+								<f:selectItem itemLabel="Cozinheiro" itemValue="cozinheiro" />
+							</p:selectOneRadio></td>
+					</tr>
+					
+					<tr>
+						<td>
+							<p:outputLabel value="Quadro de horário"/>
+						</td>
+						
+						<td>
+							<p:commandButton value="Selecionar" type="button" onclick="PF('dlg2').show();" />
+							<p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+									<p:dataTable id="listarFornecedor"
+										value="#{quadroHorariosBean.quadroHorariosList}" var="QuadroHorario"
+										emptyMessage="Nenhum Quadro de horário encontrado.">
+										<f:facet name="header">
+					         			 	Quadro de horários
+					      			 	</f:facet>
+										<p:column headerText="Código">
+											<h:outputText value="#{QuadroHorario.idQuadroHorarios}" />
+										</p:column>
+										<p:column headerText="Hora de entrada">
+											<h:outputText value="#{QuadroHorario.horaDeChegada}" />
+										</p:column>
+										<p:column headerText="Hora de saída">
+											<h:outputText value="#{QuadroHorario.horaDeSaida}" />
+										</p:column>
+										
+										<p:column headerText="Selecionar">
+											<p:commandButton action="#{funcionarioBean.escolherQuadroHorario}" icon="ui-icon-arrowrefresh-1-e" title="Selecionar quadro de horário do funcionário."  onclick="PF('dlg2').hide();">
+												<f:setPropertyActionListener value="#{QuadroHorario}"
+													target="#{funcionarioBean.quadroHorario}" />
+											</p:commandButton>
+											
+										</p:column>
+									</p:dataTable>
+    							<h:outputText value="This is a Modal Dialog." />
+							</p:dialog>
+						</td>
+						
+					</tr>
+					
+					<tr>
+						<td><p:commandButton value="Cadastrar funcionario"
+								update="@form" process="@form"
+								action="#{funcionarioBean.salvar}" /></td>
+					</tr>
+				</table>
+			</section>
+			</main>
+		</h:form>
+	</ui:define>
+</ui:composition>

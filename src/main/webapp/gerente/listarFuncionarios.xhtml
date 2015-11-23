@@ -1,0 +1,101 @@
+<ui:composition template="/WEB-INF/template/templateGerente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+			<main>     
+				<section class="pedido">
+					<p:messages />
+					<table>
+						<tr>
+							<td>
+								<p:dataTable id="func" 
+										value="#{funcionarioBean.listaFuncionarios}" var="funcionario"
+										emptyMessage="Nenhum fornecedor encontrado." paginator="true" rows="1" style="width=20%;">
+										<f:facet name="header">
+					         			 	Lista de Funcionários 
+					      			 	</f:facet>
+					      			 	
+					      			 	<p:column headerText="ID">
+					      			 		<p:outputLabel value="#{funcionario.idFuncionario}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Nome">
+					      			 		<p:outputLabel value="#{funcionario.nome}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Salário">
+					      			 		<p:outputLabel value="#{funcionario.salarioBase}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Carga horária base">
+					      			 		<p:outputLabel value="#{funcionario.cargaHorariaBase}"/>
+					      			 	</p:column>
+					      			 
+					      			 	<p:column headerText="Carga horária trabalhada">
+					      			 		<p:outputLabel value="#{funcionario.cargaHorariaTrabalhada}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Categoria">
+					      			 		<p:outputLabel value="#{funcionario.categoria}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Cpf">
+					      			 		<p:outputLabel value="#{funcionario.cpf}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="horas extras">
+					      			 		<p:outputLabel value="#{funcionario.horasExtras}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Status contratual">
+					      			 		<p:outputLabel value="#{funcionario.statusContratual}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Quadro de horário">
+					      			 		<p:outputLabel value="#{funcionario.quadroHorario}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Alterar">
+											<p:commandButton action="#{funcionarioBean.editar()}" icon="ui-icon-arrowrefresh-1-e" title="Alterar funcionario"  process="@form"
+												update="@form">
+												<f:setPropertyActionListener value="#{funcionario}"
+													target="#{funcionarioBean.funcionario}" />
+													  
+											</p:commandButton>
+										
+										</p:column>
+										<p:column headerText="Excluir">
+											<p:commandButton icon="ui-icon-trash" title="Excluir funcionário" 
+												action="#{funcionarioBean.excluir()}" process="@form"
+												update="@form">
+												<f:setPropertyActionListener value="#{funcionario}"
+													target="#{funcionarioBean.funcionarioSelecionado}" />
+					
+												<p:confirm header="Exclusão de funcionário"
+													message="Tem certeza que deseja excluir o funcionário ?"
+													icon="ui-icon-alert">
+												</p:confirm>
+					
+											</p:commandButton>
+										</p:column>
+										
+					      		</p:dataTable>
+					      		
+								<p:confirmDialog global="true">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Nao" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+				      		</td>
+			      		</tr>
+		      		</table>
+	      		</section>
+      		</main>
+		</h:form>
+	</ui:define>
+</ui:composition>

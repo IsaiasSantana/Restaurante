@@ -1,0 +1,143 @@
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+			<h:outputStylesheet library="css" name="style.css" />
+			<h:inputHidden value="#{itemBean.item.idItem}"/>
+			<aside class="menu_gerente">
+				<h3>Olá Greedo!</h3>
+				<h4>O que deseja fazer?</h4>
+				<table>
+					<tr>
+						<td><h:link value="Retirada de item" /> <details>
+								<summary>Gerenciar Fornecedores</summary>
+								<table>
+									<tr>
+										<td><h:link value="Visualizar item" /></td>
+									</tr>
+									<tr>
+										<td><h:link value="Cadastrar Item" /></td>
+									</tr>
+								</table>
+							</details></td>
+					</tr>
+					<tr>
+						<td><h:link value="Encomendas" /></td>
+					</tr>
+					<tr>
+						<td><details>
+								<summary>Gerenciar Itens</summary>
+								<table>
+									<tr>
+										<td><h:link value="Listar itens" /></td>
+									</tr>
+									<tr>
+										<td><h:link value="Novo item"
+												outcome="cadastroItem" /></td>
+									</tr>
+								</table>
+							</details></td>
+					</tr>
+				</table>
+			</aside>
+			<main>
+			<h2>Listar Itens</h2>
+			<section class="pedido">
+				<p:messages />
+				<p:dataTable id="listarItem"
+					value="#{itemBean.listaItem}" var="item"
+					emptyMessage="Nenhum item encontrado.">
+					<f:facet name="header">
+         			 	Lista de Itens 
+      			 </f:facet>
+					<p:column headerText="Código">
+						<h:outputText value="#{item.idItem}" />
+					</p:column>
+					
+					<p:column headerText="Item">
+						<h:outputText value="#{item.nomeItem}" />
+					</p:column>
+					
+					<p:column headerText="Tipo">
+						<h:outputText value="#{item.tipoItem}" />
+					</p:column>
+					
+					<p:column headerText="Quantidade">
+						<h:outputText value="#{item.quantidade}" />
+					</p:column>
+					
+					<p:column headerText="Alterar">
+						<p:commandButton action="#{itemBean.editar}" icon="ui-icon-arrowrefresh-1-e" title="Alterar item"  process="@form"
+							update="@form">
+							<f:setPropertyActionListener value="#{item}"
+								target="#{itemBean.item}" />
+									     
+						</p:commandButton>
+					</p:column>
+					
+					<p:column headerText="Excluir">
+						<p:commandButton icon="ui-icon-trash" title="Excluir item" 
+							action="#{itemBean.excluir()}" process="@form"
+							update="@form">
+							<f:setPropertyActionListener value="#{item}"
+								target="#{itemBean.itemSelecionado}" />
+
+							<p:confirm header="Exclusão de item"
+								message="Tem certeza que deseja excluir o fornecedor?"
+								icon="ui-icon-alert">
+							</p:confirm>
+
+						</p:commandButton>
+					</p:column>
+					
+						
+				</p:dataTable>
+				
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Nao" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</section>
+			</main>
+
+
+			<aside class="login">
+				<table>
+					<tr>
+						<td><h1>Perfil</h1></td>
+					</tr>
+					<br />
+					<tr>
+						<td><h:graphicImage library="img" name="greedo.jpg"
+								width="130" height="160" /></td>
+					</tr>
+					<tr>
+						<td>Nome: Greedo</td>
+					</tr>
+					<tr>
+						<td>Função:Estoquista</td>
+					</tr>
+					<tr>
+						<td>Turno: Tarde</td>
+					</tr>
+					<tr>
+						<td>Entrada: 13:00</td>
+					</tr>
+					<tr>
+						<td>Saida: 22:00</td>
+					</tr>
+					<tr>
+						<td>botao de logout</td>
+					</tr>
+				</table>
+			</aside>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

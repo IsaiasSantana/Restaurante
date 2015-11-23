@@ -1,0 +1,36 @@
+<ui:composition template="/WEB-INF/template/templateGerente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+		
+	<ui:define name="conteudo">
+		<h:form>
+			
+			<main>
+				<h2>Novo quadro de horário</h2>
+				<section class="pedido">
+					<p:messages />
+					<table>
+						<tr>
+							<td><p:outputLabel value="Hora de chegada" for="horaChegada" /></td>
+							<td><p:calendar  locale="pt" id="horaChegada"   value="#{quadroHorariosBean.quadroHorarios.horaDeChegada}" pattern="HH:mm:ss" timeOnly="true"  required="true" requiredMessage="É nescessário informar a hora de chegada dos funcionários para esse quadro de horário."/></td>
+						</tr>
+						
+						<tr>
+							<td><p:outputLabel value="Hora de saída" for="horaSaida" /></td>
+							<td><p:calendar locale="pt" id="horaSaida" value="#{quadroHorariosBean.quadroHorarios.horaDeSaida}" pattern="HH:mm:ss" timeOnly="true"  required="true" requiredMessage="É nescessário informar a hora de saída dos funcionários para esse quadro de horário."/></td>
+						</tr>
+												
+						<tr>
+							<td>
+								<p:commandButton  value="salvar quadro de horário" update="@form" process="@form"  action="#{quadroHorariosBean.salvar}"/>
+							</td>
+						</tr>
+					</table>
+				</section>
+			</main>
+		</h:form>
+	</ui:define>
+</ui:composition>

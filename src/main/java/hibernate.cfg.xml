@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- Configuração da conexao com o banco de dados MySql e dialeto -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="current_session_context_class">thread</property>
+		<!-- Fim config conexao dialeto -->
+
+		<!-- Base de dados local -->
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/restaurante</property>
+		<!-- Fim base de dados local -->
+
+
+		<!-- Configuração de Debug -->
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<!-- fim debug -->
+
+		<!-- auto update -->
+		<property name="hbm2ddl.auto">update</property>
+		<!-- fim auto update -->
+
+		<!-- configuration pool via c3p0 -->
+		<property name="hibernate.c3p0.idle_test_period">100</property>
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<property name="hibernate.c3p0.timeout">300</property>
+		<property name="hibernate.c3p0.min_size">10</property>
+		<property name="hibernate.c3p0.max_size">100</property>
+		<property name="hibernate.c3p0.max_statements">0</property>
+
+
+		<!-- Mapeamento das entidades do banco de dados -->
+		<mapping class="restaurante.modelo.funcionario.Funcionario" />
+		<mapping class="restaurante.modelo.quadroHorarios.QuadroHorarios"/>
+		<mapping class="restaurante.modelo.contato.Contato" />
+		<mapping class="restaurante.modelo.fornecedor.Fornecedor" />
+		<mapping class="restaurante.modelo.produto.Produto" />
+		<mapping class="restaurante.modelo.pedido.Pedido" />
+		<mapping class="restaurante.modelo.comanda.Comanda" />
+		<mapping class="restaurante.modelo.item.Item" />
+		<mapping class="restaurante.modelo.lote.Lote" />
+		
+		
+	</session-factory>
+</hibernate-configuration>
+

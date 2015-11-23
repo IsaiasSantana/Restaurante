@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Sistema de Restaurante"/>
+		<meta name="author" content="Danilo Ramos"/>
+		<h:outputStylesheet library="css" name="style.css"/> 
+		<h:outputScript library="js" name="jquery.maskMoney.js" rendered="true"/> <!-- importa o script de mascára de campo monetário --> 
+		
+		<title>Cadastrar produto</title>
+	</h:head>
+	<h:body>
+		
+		<header class="head">
+					<table>
+						<tr>
+							<td> <p:graphicImage library="img" name="logo.png" width = "150" height = "150"/></td>
+						<td>
+							<table>
+								<tr>
+									<td><h1>Cantina de Mos Eisley</h1></td>
+								</tr>
+								<tr>
+									<td><p:graphicImage library="img" name="moseisley.png" width = "388" height = "100"/></td>
+								</tr>
+							</table>
+						</td>
+					</tr>				
+				</table>
+		</header>
+		
+		<aside class = "menu_gerente">
+				<h3>Olá Han Solo!</h3>
+				<h4>O que deseja fazer?</h4>
+				<table>
+					<tr>
+						<td><h3>Gerenciar Comandas</h3></td>
+					</tr>
+					<tr>				
+						<td><a href="listaComandasAtivas.jsf">Comandas Ativas</a></td>
+					</tr>
+					<tr>
+						<td><a href="listaComandasInativas.jsf">Comandas Inativas</a></td>
+					</tr>
+					<tr>
+						<td><h3>Gerenciar Pedidos</h3></td>
+					</tr>
+					<tr>				
+						<td><a href="listaPedidos.jsf">Listar Pedidos</a></td>
+					</tr>
+					<tr>
+						<td><h3>Gerencia de Cardápio</h3></td>
+					</tr>
+					<tr>
+						<td><a href="cardapio.jsf">Cardápio</a></td>
+					</tr>
+					<tr>
+						<td><h3>Gerenciar Pessoal</h3></td>
+					</tr>
+					<tr>
+						<td><a href="listarQuadroHorarios.jsf">Listar Quadro de Horários</a></td>
+					</tr>
+					<tr>
+						<td><a href="cadastroQuadroHorario.jsf">Cadastrar Quadro de Horários</a></td>
+					</tr>
+					<tr>
+						<td><a href="cadastrarFuncionario.jsf">Listar Funcionarios</a></td>
+					</tr>
+					<tr>
+						<td><a href="cadastrarFuncionario.jsf">Novo Funcionario</a></td>
+					</tr>
+				</table>
+			</aside>
+		
+			<main>
+
+				<h:form>
+				
+					<script> <!-- Este script serve para mascára do campo preço, ele deve ficar dentro do formulário porque não há uso de ajax -->
+						function configurarMoeda() {
+							$(".moeda").maskMoney({ decimal: ",", thousands: ".", allowZero: true });
+						}
+						
+						$(document).ready(function() {
+							configurarMoeda();
+						});
+					</script>
+						
+				
+					<h2 style="margin-top:0">Cadastrar novo produto.</h2>
+					<p:messages />
+					<h:inputHidden value="#{produtoBean.produto.idProduto}"/>
+				   <div class="section">
+				   <div class="pedido">
+					    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+					    	
+					    	<p:outputLabel value="Nome do produto: " for="nomeProduto"/>
+					    	<p:inputText id="nomeProduto" value="#{produtoBean.produto.nome}" required="true" requiredMessage="O nome do produto é obrigatório!"/>
+					        <p:outputLabel for="tipoProduto" value="Tipo do produto: " />
+					        <p:selectOneRadio id="tipoProduto" value="#{produtoBean.produto.isRefeicao}" layout="grid" columns="2" required="true" requiredMessage="Qual o tipo do produto ?">
+					            <f:selectItem itemLabel="Refeição" itemValue="true" />
+					            <f:selectItem itemLabel="Bebida" itemValue="false" />
+					        </p:selectOneRadio>
+					       
+					        <p:outputLabel value="Preço: " for="preco"/>
+					        <p:inputText styleClass="moeda" value="#{produtoBean.produto.preco}" id="preco" required="true" requiredMessage="O campo preço é obrigatório !" >
+								<f:convertNumber pattern="#,##0.00" locale="pt_BR" maxFractionDigits="2"/>
+							</p:inputText>
+							
+					    </h:panelGrid>	
+				    </div>
+				    </div>
+				    <p:commandButton value="Salvar" update="@form"
+								process="@form"  action="#{produtoBean.salvar}"/>
+					<p:commandButton value="Salvar e Cadastrar Outro Produto" update="@form"
+								process="@form"  action="#{produtoBean.salvar2}"/>
+				</h:form>
+			</main>
+			
+			<aside class = "login">
+				<form>
+					<table>
+						<tr><td><h1>Perfil</h1></td></tr> <br/>
+						<tr><td><p:graphicImage library="img" name="han.jpg" alt="han solo" width="130" height="160"/></td></tr>
+						<tr><td><b>Nome:</b> Han Solo</td></tr>
+						<tr><td><b>Função:</b> Gerente</td></tr>
+						<tr><td><b>Turno:</b> Diurno</td></tr>
+						<tr><td><b>Entrada:</b> 05:00</td></tr>
+						<tr><td><b>Saida:</b> 00:00</td></tr>
+						
+						<tr><td><p:button target="index.xhtml" value="Logout"/></td></tr>
+					</table>					
+				</form>
+			</aside>
+			
+	</h:body>
+	
+</html>

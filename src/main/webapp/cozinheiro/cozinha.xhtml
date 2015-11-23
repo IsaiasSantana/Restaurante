@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Sistema de Restaurante"/>
+		<meta name="author" content="Danilo Ramos"/>
+		<h:outputStylesheet library="css" name="style.css"/> 
+		<title>Novo Pedido</title>
+	</h:head>
+	<h:body>
+		
+		<header class="head">
+					<table>
+						<tr>
+							<td> <p:graphicImage library="img" name="logo.png" width = "150" height = "150"/></td>
+						<td>
+							<table>
+								<tr>
+									<td><h1>Cantina de Mos Eisley</h1></td>
+								</tr>
+								<tr>
+									<td><p:graphicImage library="img" name="moseisley.png" width = "388" height = "100"/></td>
+								</tr>
+							</table>
+						</td>
+					</tr>				
+				</table>
+		</header>
+		
+		<aside class = "menu">
+				<h2>Olá Jabba O Hutt!</h2>
+				=========================================
+				<p:dataTable id="listaPedidosRefeicaoPreparo" value="#{pedidoBean.listaPedidoRefeicaoPreparo}" var="pedidoRefeicao" 
+					emptyMessage="Nenhum pedido cadastrado!" >
+						<f:facet name="header">
+         			 	Refeições Em Preparo
+      					 </f:facet>
+						<p:column headerText="Nome">
+							<h:outputText value="#{pedidoRefeicao.getProduto().nome}" />
+						</p:column>
+						<p:column headerText="Qntd" style="width :25px">
+							<h:outputText value="#{pedidoRefeicao.getQntd()}" />
+						</p:column>	
+						<p:column headerText="Pronta" style="width :35px">
+						 <h:commandButton value=" "  action="#{pedidoBean.pronta}" >
+							<f:setPropertyActionListener value="#{pedidoRefeicao}" target="#{pedidoBean.pedido}">
+							</f:setPropertyActionListener>
+						</h:commandButton>
+						</p:column>
+				</p:dataTable>	
+			</aside>
+		
+			<main>
+				<h1 style="margin-top:0">Cozinha</h1>
+				<h:form>
+				<h:messages />
+				
+				  <div class="pedido">
+				  
+				<p:dataTable id="listaPedidosRefeicao" value="#{pedidoBean.listaPedidoRefeicaoEspera}" var="pedidoRefeicao" 
+					emptyMessage="Nenhuma refeição cadastrada!" >
+						<f:facet name="header">
+         			 	Refeições Em Espera
+      					 </f:facet>
+						<p:column headerText="Cod." style="width :20px">
+							<h:outputText value="#{pedidoRefeicao.getProduto().idProduto}" />
+						</p:column>
+						<p:column headerText="Com." style="width :25px">
+							<h:outputText value="??" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{pedidoRefeicao.getProduto().nome}" />
+						</p:column>
+						<p:column headerText="Qntd" style="width :25px">
+							<h:outputText value="#{pedidoRefeicao.getQntd()}" />
+						</p:column>		
+						
+						<p:column headerText="Preparo" style="width :50px">
+						 <h:commandButton value=" "  action="#{pedidoBean.emPreparo}" >
+							<f:setPropertyActionListener value="#{pedidoRefeicao}" target="#{pedidoBean.pedido}">
+							</f:setPropertyActionListener>
+						</h:commandButton>
+					</p:column>	
+				</p:dataTable>	
+		
+				     </div>
+				</h:form>
+			</main>
+			
+			<aside class = "login">
+				<form>
+					<table>
+						<tr><td><h1>Perfil</h1></td></tr> <br/>
+						<tr><td><p:graphicImage library="img" name="jabba.jpg" alt="jabba" width="130" height="160"/></td></tr>
+						<tr><td><b>Nome:</b> Jabba O Hutt</td></tr>
+						<tr><td><b>Função:</b> Cozinheiro</td></tr>
+						<tr><td><b>Turno:</b> Noite</td></tr>
+						<tr><td><b>Entrada:</b> 18:00</td></tr>
+						<tr><td><b>Saida:</b> 00:00</td></tr>
+						
+						<tr><td><p:button target="index.xhtml" value="Logout"/></td></tr>
+					</table>					
+				</form>
+			</aside>
+			
+	</h:body>
+	
+</html>

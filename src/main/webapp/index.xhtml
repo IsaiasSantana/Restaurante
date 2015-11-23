@@ -1,0 +1,29 @@
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+			<div style="margin-left: 40%;margin-top: 10%">
+				<p:panel id="basic" header="Login" footer="Sistema Restaurante"
+					style="margin-bottom:35px; width:40%" >
+					<p:messages />
+					<h:panelGrid columns="2" id="painel" cellpadding="5"
+						cellspacing="6">
+						<p:outputLabel value="Usuário" for="login" />
+						<p:inputText id="login" required="true"
+							requiredMessage="É nescessário informar um usuário válido" />
+						<p:outputLabel value="Senha" for="senha" />
+						<p:password id="senha" required="true"
+							requiredMessage="É nescessário informar uma senha"/>
+						<h:outputText />
+						<p:commandButton value="Entrar" update="@form:painel"
+							process="@form:painel" ajax="false" />
+					</h:panelGrid>
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

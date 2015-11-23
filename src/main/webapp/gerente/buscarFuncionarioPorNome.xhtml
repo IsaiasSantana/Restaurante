@@ -1,0 +1,98 @@
+<ui:composition template="/WEB-INF/template/templateGerente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+			<main>     
+				<section class="pedido">
+					<p:messages />
+					
+					<h:panelGrid columns="1">
+								<h:form>
+								 	<p:outputLabel value="Nome do funcionário: " for="nomeFunc"/>
+								 	<p:inputText  id="nomeFunc" required="true" requiredMessage="Informe o nome do funcionário" value="#{funcionarioBean.funcionarioSelecionado.nome}"/> 
+						 		</h:form>	
+						 		
+						 		<p:commandButton value="Buscar." action="#{funcionarioBean.buscaPorNome()}"  ajax="false" />
+								 	
+									<p:dataTable id="listaFuncionariosNome"
+										value="#{funcionarioBean.listaFuncionarioPorNome}" var="funcionario"
+										emptyMessage="Nenhum funcionário econtrado com esse nome." rendered="#{not empty funcionarioBean.listaFuncionarioPorNome}">
+										<f:facet name="header">
+					         			 	Funcionários encontrados.
+					      			 	</f:facet>
+										
+										<p:column headerText="ID">
+					      			 		<p:outputLabel value="#{funcionario.idFuncionario}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Nome">
+					      			 		<p:outputLabel value="#{funcionario.nome}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Salário">
+					      			 		<p:outputLabel value="#{funcionario.salarioBase}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Carga horária base">
+					      			 		<p:outputLabel value="#{funcionario.cargaHorariaBase}"/>
+					      			 	</p:column>
+					      			 
+					      			 	<p:column headerText="Carga horária trabalhada">
+					      			 		<p:outputLabel value="#{funcionario.cargaHorariaTrabalhada}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Categoria">
+					      			 		<p:outputLabel value="#{funcionario.categoria}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Cpf">
+					      			 		<p:outputLabel value="#{funcionario.cpf}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="horas extras">
+					      			 		<p:outputLabel value="#{funcionario.horasExtras}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Status contratual">
+					      			 		<p:outputLabel value="#{funcionario.statusContratual}"/>
+					      			 	</p:column>
+					      			 	
+					      			 	<p:column headerText="Quadro de horário">
+					      			 		<p:commandButton onclick="PF('dlg3').show();" value="Ver quadro de horário">
+					      			 			
+					      			 		</p:commandButton>
+					      			 		
+					      			 		<p:dialog header="Quadro de horário" widgetVar="dlg3" height="100">
+											
+											<p:panelGrid columns="2">
+												<p:outputLabel value="ID: "/>
+												<p:outputLabel value="#{funcionario.quadroHorario.idQuadroHorarios}"/>
+												
+												<p:outputLabel value="hora de chegada: "/>
+												<p:outputLabel value="#{funcionario.quadroHorario.horaDeChegada}"/>
+												
+												<p:outputLabel value="hora de saída: "/>
+												<p:outputLabel value="#{funcionario.quadroHorario.horaDeSaida}"/>
+												
+											</p:panelGrid>
+											
+										</p:dialog>
+					      			 		
+					      			 	</p:column>
+					      			 	
+					      			 	
+					      			 	
+					      			</p:dataTable>
+	
+						 						
+					</h:panelGrid>
+					
+				</section>
+			</main>
+		</h:form>
+	</ui:define>
+</ui:composition>

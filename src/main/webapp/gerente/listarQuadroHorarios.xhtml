@@ -1,0 +1,87 @@
+<ui:composition template="/WEB-INF/template/templateGerente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+			<h:outputStylesheet library="css" name="style.css" />
+
+			<aside class="menu_gerente">
+				<h3>Olá Greedo!</h3>
+				<h4>O que deseja fazer?</h4>
+				<table>
+					<tr>  
+						<td><h:link value="Retirada de item" /> <details>
+								<summary>Gerenciar Itens</summary>
+								<table>
+									<tr>
+										<td><h:link value="Visualizar item" /></td>
+									</tr>
+									<tr>
+										<td><h:link value="Cadastrar Item" /></td>
+									</tr>
+								</table>
+							</details></td>
+					</tr>
+					<tr>
+						<td><h:link value="Encomendas" /></td>
+					</tr>
+					<tr>
+						<td><details>
+								<summary>Gerenciar Fornecedores</summary>
+								<table>
+									<tr>
+										<td><h:link value="Listar fornecedores" /></td>
+									</tr>
+									<tr>
+										<td><h:link value="Novo fornecedor"
+												outcome="cadastroFornecedor" /></td>
+									</tr>
+								</table>
+							</details></td>
+					</tr>
+				</table>
+			</aside>
+
+			<main>
+			<h2>Ver quadros de horarios</h2>
+			<section class="pedido">
+				<p:messages />
+				<p:dataTable id="listarFornecedor"
+					value="#{quadroHorariosBean.quadroHorariosList}" var="quadroHorario"
+					emptyMessage="Nenhum Quadro de horário encontrado.">
+					<f:facet name="header">
+         			 	Lista de quadro de horarios
+      			 </f:facet>
+					<p:column headerText="Código">
+						<h:outputText value="#{quadroHorario.idQuadroHorarios}" />
+					</p:column>
+					<p:column headerText="HoraDeChegada">
+						<h:outputText value="#{quadroHorario.horaDeChegada}" />
+					</p:column>
+					<p:column headerText="Hora de saída">
+						<h:outputText value="#{quadroHorario.horaDeSaida}" />
+					</p:column>
+					
+					<p:column headerText="Selecionar">
+						<p:commandButton action="#{funcionarioBean.selecionarQuadroHorario}"  value="Selecionar." title="selecionar quadro de horário">
+							<f:setPropertyActionListener value="#{quadroHorario}"
+								target="#{funcionarioBean.funcionario.quadroHorario}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Nao" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</section>
+			</main>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
