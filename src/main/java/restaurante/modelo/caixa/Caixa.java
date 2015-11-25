@@ -1,10 +1,10 @@
 package restaurante.modelo.caixa;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,10 +20,14 @@ import restaurante.modelo.funcionario.Funcionario;
  */
 @Entity
 @Table(name="caixa")
-public class Caixa {
+public class Caixa implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Id
-	@GeneratedValue
-	private Integer idCaixa;
+	private String idCaixa;
 	private Date dia;
 	private double totalCaixa;
 	private transient List<CaixaEntrada> listaEntradas;
@@ -72,10 +76,10 @@ public class Caixa {
 		this.responsavelFechamento = responsavelFechamento;
 	}
 	
-	public Integer getIdCaixa() {
+	public String getIdCaixa() {
 		return idCaixa;
 	}
-	public void setIdCaixa(Integer idCaixa) {
+	public void setIdCaixa(String idCaixa) {
 		this.idCaixa = idCaixa;
 	}
 	@Override

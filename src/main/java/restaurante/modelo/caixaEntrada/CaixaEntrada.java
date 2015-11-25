@@ -1,5 +1,6 @@
 package restaurante.modelo.caixaEntrada;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,7 +12,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import restaurante.modelo.caixa.Caixa;
-import restaurante.modelo.funcionario.Funcionario;
 
 /**
  * 
@@ -20,7 +20,12 @@ import restaurante.modelo.funcionario.Funcionario;
  */
 @Entity
 @Table(name="caixa_entrada")
-public class CaixaEntrada {
+public class CaixaEntrada implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Integer idEntrada;
@@ -33,7 +38,7 @@ public class CaixaEntrada {
 	@ManyToOne
 	private Caixa caixa;
 	
-	private Funcionario responsavel;
+	private Integer responsavel;
 	
 	public Integer getIdEntrada() {
 		return idEntrada;
@@ -65,10 +70,10 @@ public class CaixaEntrada {
 	public void setTimeStamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-	public Funcionario getResponsavel() {
+	public Integer getResponsavel() {
 		return responsavel;
 	}
-	public void setResponsavel(Funcionario responsavel) {
+	public void setResponsavel(Integer responsavel) {
 		this.responsavel = responsavel;
 	}
 	

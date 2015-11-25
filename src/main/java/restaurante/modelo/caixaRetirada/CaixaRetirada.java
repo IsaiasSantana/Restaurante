@@ -1,5 +1,6 @@
 package restaurante.modelo.caixaRetirada;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -20,7 +21,11 @@ import restaurante.modelo.funcionario.Funcionario;
  */
 @Entity
 @Table(name="caixa_retirada")
-public class CaixaRetirada {
+public class CaixaRetirada implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Integer idRetirada;

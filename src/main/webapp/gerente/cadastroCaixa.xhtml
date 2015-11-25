@@ -1,0 +1,27 @@
+<ui:composition template="/WEB-INF/template/templateGerente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+			<main>     
+				<section class="pedido">
+					<h1> <p:outputLabel value="Novo caixa"/> </h1>
+					<p:messages/>
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Identificador do caixa" for="idCaixa"/>
+						<p:inputText id="idCaixa" required="true" requiredMessage="Por favor, informe um identificador para o caixa" value="#{caixaBean.caixa.idCaixa}"/>
+						<p:outputLabel value="Funcionário responsável pela abertura e fechamento do caixa:  " for="gerente"/>
+				        <p:selectOneMenu converter="funcionarioConverter" id="gerente" value="#{caixaBean.funcionarioResponsavel}" required="true" requiredMessage="Escolha o gerente que gerência esse caixa.">
+				            <f:selectItems value="#{caixaBean.gerentes}" var="func" itemValue="#{func}"/>
+				            
+				        </p:selectOneMenu>
+				        <p:commandButton action="#{caixaBean.salvar()}" value="Cadastrar Caixa" ajax="false"/>
+					</h:panelGrid>
+				</section>
+			</main>
+		</h:form>
+	</ui:define>
+</ui:composition>
