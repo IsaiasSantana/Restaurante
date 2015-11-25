@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import restaurante.modelo.caixa.Caixa;
 import restaurante.modelo.funcionario.Funcionario;
@@ -27,6 +29,7 @@ public class CaixaRetirada {
 	@ManyToOne
 	private Caixa caixa;
 	private Funcionario responsavel;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date timeStamp;
 	
 	
