@@ -1,0 +1,44 @@
+<ui:composition template="/WEB-INF/template/templateGerente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+			
+			<script>
+				function configurarMoeda() {
+					$(".moeda").maskMoney({
+						decimal : ",",
+						thousands : ".",
+						allowZero : true
+					});
+				}
+
+				$(document).ready(function() {
+					configurarMoeda();
+				});
+			</script>
+			
+			<main>     
+				<section class="pedido">
+					<h1> <p:outputLabel value="Controle do caixa: Entrada no caixa"/> </h1>
+					<br/> <h:panelGrid columns="2">
+						<p:outputLabel value="Valor de entrada no caixa: "/>
+						<p:inputText styleClass="moeda">
+							<f:convertNumber pattern="#,##0.00" locale="pt_BR"
+									maxFractionDigits="2" />
+								<f:validateDoubleRange minimum="0.00" />
+						</p:inputText>
+						<p:outputLabel value="Escolha o caixa para o depósito: "/>
+						<p:button value="Escolher caixa"/>
+						<p:outputLabel value="Funcionário responsável: "/>
+						<p:button value="Selecionar funcionário"/>
+						<p:commandButton value="Cadastrar entrada no caixa"/>
+					</h:panelGrid>
+				</section>
+			</main>
+		</h:form>
+	</ui:define>
+</ui:composition>
