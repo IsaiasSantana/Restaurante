@@ -44,6 +44,9 @@
 		<mapping class="restaurante.modelo.comanda.Comanda" />
 		<mapping class="restaurante.modelo.item.Item" />
 		<mapping class="restaurante.modelo.lote.Lote" />
+		<mapping class="restaurante.modelo.caixa.Caixa"/>
+		<mapping class="restaurante.modelo.caixaEntrada.CaixaEntrada"/>
+		<mapping class="restaurante.modelo.caixaRetirada.CaixaRetirada"/>
 		
 		
 	</session-factory>
