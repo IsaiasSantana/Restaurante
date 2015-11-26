@@ -39,15 +39,13 @@ public  class Funcionario implements Serializable {
 	@Temporal(TemporalType.TIME)
 	private Date horasExtras;
 	private int statusContratual;
-
+	
+	/**
+	 * Muitos funcionários cumprem um único quadro de horário.
+	 */
 	@ManyToOne
 	private QuadroHorarios quadroHorario;
-	
-	
-	
-	
-	
-	
+		
 	
 	@Override
 	public int hashCode() {

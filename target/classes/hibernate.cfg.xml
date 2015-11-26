@@ -40,9 +40,17 @@
 		<mapping class="restaurante.modelo.comanda.Comanda" />
 		<mapping class="restaurante.modelo.item.Item" />
 		<mapping class="restaurante.modelo.lote.Lote" />
+<<<<<<< HEAD
 		<mapping class="restaurante.modelo.usuario.Usuario" />
 
 
+=======
+		<mapping class="restaurante.modelo.caixa.Caixa"/>
+		<mapping class="restaurante.modelo.caixaEntrada.CaixaEntrada"/>
+		<mapping class="restaurante.modelo.caixaRetirada.CaixaRetirada"/>
+		
+		
+>>>>>>> d32d61962be1e9ad9620a503beb4c2398c4d91b8
 	</session-factory>
 </hibernate-configuration>
 

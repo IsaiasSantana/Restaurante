@@ -1,0 +1,73 @@
+<ui:composition template="/WEB-INF/template/templateGerente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+			
+			<script>
+				function configurarMoeda() {
+					$(".moeda").maskMoney({
+						decimal : ",",
+						thousands : ".",
+						allowZero : true
+					});
+				}
+
+				$(document).ready(function() {
+					configurarMoeda();
+				});
+			</script>
+			
+			<main>     
+				<section class="pedido">
+					<h1> <p:outputLabel value="Controle do caixa: Entrada no caixa"/> </h1>
+					<br/> <h:panelGrid columns="2">
+						<p:outputLabel value="Valor de entrada no caixa: " for="valor"/>
+						<p:inputText id="valor" value="#{caixaEntradaBean.caixaEntrada.valor}" styleClass="moeda" required="true" requiredMessage="Com qual valor será depositado no caixa ?">
+							<f:convertNumber pattern="#,##0.00" locale="pt_BR"
+									maxFractionDigits="2" />
+								<f:validateDoubleRange minimum="0.00" />
+						</p:inputText>
+						<p:outputLabel value="Escolha o caixa para o depósito: " for="caixa"/>
+						
+						<p:selectOneMenu id="caixa" value="#{caixaEntradaBean.caixa}" converter="caixaConverter" style="width:125px" required="true" requiredMessage="Escolha um caixa para depósito.">
+				            <f:selectItem itemLabel="Selecione" itemValue="" />
+				            <f:selectItems value="#{caixaEntradaBean.listaCaixas}" var="caixa" itemLabel="#{caixa.idCaixa}" itemValue="#{caixa}"/>
+				        </p:selectOneMenu>
+						
+						<p:outputLabel value="Funcionário responsável: " for="funcRes"/>
+						<p:commandButton id="funcRes" onclick="PF('dialogoFuncionario').show();" value="Selecionar funcionário"/>
+						
+						<p:dialog header="Lista funcionários" widgetVar="dialogoFuncionario" height="100">
+							<p:dataTable var="funcionario" value="#{funcionarioBean.listaFuncionarios}">
+								<f:facet name="header">
+					         		Selecione um funcionário
+					      		</f:facet>
+							 	<p:column headerText="Nome">
+							 		<p:outputLabel value="#{funcionario.nome}"/>
+							 	</p:column>
+							 	<p:column headerText="Cpf">
+							 		<p:outputLabel value="#{funcionario.cpf}"/>
+							 	</p:column>
+							 	<p:column headerText="Categoria">
+							 		<p:outputLabel value="#{funcionario.categoria}"/>
+							 	</p:column>
+							 	<p:column>
+							 		<p:commandButton value="Selecionar" onclick="PF('dialogoFuncionario').hide();">
+							 			<f:setPropertyActionListener value="#{funcionario.idFuncionario}"
+													target="#{caixaEntradaBean.caixaEntrada.responsavel}" />
+							 		</p:commandButton>
+							 	</p:column>
+							</p:dataTable>
+						</p:dialog>
+						
+						<p:commandButton value="Cadastrar entrada no caixa" action="#{caixaEntradaBean.salvar()}"  ajax="false"/>
+					</h:panelGrid>
+				</section>
+			</main>
+		</h:form>
+	</ui:define>
+</ui:composition>
