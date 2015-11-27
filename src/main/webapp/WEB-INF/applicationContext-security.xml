@@ -10,7 +10,7 @@
 	<http auto-config="true">
 		<intercept-url pattern="/estoquista/**" access="ROLE_ADMINISTRADOR"/>
 		<form-login login-page="/public/login.jsf" always-use-default-target="true"
-		default-target-url="/estoquista/cadastroFornecedor.jsf"
+		default-target-url="/restrito/principal.jsf"
 		authentication-failure-url="/public/login.jsf?login_error=1"/>		
 		<logout/>
 		<remember-me/>
