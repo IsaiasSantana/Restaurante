@@ -12,7 +12,7 @@
 		<form-login login-page="/public/login.jsf" always-use-default-target="true"
 		default-target-url="/restrito/principal.jsf"
 		authentication-failure-url="/public/login.jsf?login_error=1"/>		
-		<logout/>
+		<logout logout-success-url="/public/login.jsf" />
 		<remember-me/>
 	</http>
 	<authentication-manager>
