@@ -56,7 +56,7 @@ public class FornecedorBean {
 					fornecedorRN.salvar(fornecedor);
 					Mensagens.adicionarMensagemConfirmacao("Fornecedor cadastrado");
 				} catch (Exception e) {
-					Mensagens.adicionarMensagemErro("Não foi possivel cadastrar  o fornecedor");		
+					Mensagens.adicionarMensagemErro("Nï¿½o foi possivel cadastrar  o fornecedor");		
 				}
 				pagina = "cadastroFornecedor";
 			}
@@ -97,16 +97,16 @@ public class FornecedorBean {
 		try {
 			fornecedorRN.excluir(fornecedorSelecionado);
 		} catch (Exception e) {
-			Mensagens.adicionarMensagemErro("Não foi possivel excluir o fornecedor");	
+			Mensagens.adicionarMensagemErro("Nï¿½o foi possivel excluir o fornecedor");	
 		}
 		Mensagens.adicionarMensagemConfirmacao("Fornecedor excluido");	
 
 	}
 	/**
 	 * @author alkxyly
-	 * @return página de cadastro de fornecedor
+	 * @return pï¿½gina de cadastro de fornecedor
 	 * 
-	 * Redireciona para página de cadastro com o objeto selecionado para alteração.
+	 * Redireciona para pï¿½gina de cadastro com o objeto selecionado para alteraï¿½ï¿½o.
 	 */
 	public String editar(){
 		return "cadastroFornecedor";
@@ -134,7 +134,7 @@ public class FornecedorBean {
 	}
 	public List<Fornecedor> getListaFornecedor() {
 		FornecedorRN fornecedorRN = new FornecedorRN();
-		listaFornecedor = fornecedorRN.listar();
+			listaFornecedor = fornecedorRN.listar();			
 		return listaFornecedor;
 	}
 	public void setListaFornecedor(List<Fornecedor> listaFornecedor) {

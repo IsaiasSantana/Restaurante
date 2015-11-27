@@ -4,16 +4,12 @@
 
 		<!-- Configuração da conexao com o banco de dados MySql e dialeto -->
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="current_session_context_class">thread</property>
-		<!-- Fim config conexao dialeto -->
-
-		<!-- Base de dados local -->
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">root</property>
-
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/restaurante</property>
-		<!-- Fim base de dados local -->
+		<property name="connection.datasource">java:/comp/env/jdbc/RestauranteDB</property>
+		<!-- <property name="connection.driver_class">com.mysql.jdbc.Driver</property> -->
+		<!-- <property name="hibernate.connection.username">root</property> -->
+		<!-- <property name="hibernate.connection.password">root</property> -->
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/restaurante</property> -->
 
 
 		<!-- Configuração de Debug -->
@@ -36,7 +32,7 @@
 
 		<!-- Mapeamento das entidades do banco de dados -->
 		<mapping class="restaurante.modelo.funcionario.Funcionario" />
-		<mapping class="restaurante.modelo.quadroHorarios.QuadroHorarios"/>
+		<mapping class="restaurante.modelo.quadroHorarios.QuadroHorarios" />
 		<mapping class="restaurante.modelo.contato.Contato" />
 		<mapping class="restaurante.modelo.fornecedor.Fornecedor" />
 		<mapping class="restaurante.modelo.produto.Produto" />
@@ -44,10 +40,10 @@
 		<mapping class="restaurante.modelo.comanda.Comanda" />
 		<mapping class="restaurante.modelo.item.Item" />
 		<mapping class="restaurante.modelo.lote.Lote" />
+		<mapping class="restaurante.modelo.usuario.Usuario" />
 		<mapping class="restaurante.modelo.caixa.Caixa"/>
 		<mapping class="restaurante.modelo.caixaEntrada.CaixaEntrada"/>
-		<mapping class="restaurante.modelo.caixaRetirada.CaixaRetirada"/>
-		
+		<mapping class="restaurante.modelo.caixaRetirada.CaixaRetirada"/>	
 		
 	</session-factory>
 </hibernate-configuration>

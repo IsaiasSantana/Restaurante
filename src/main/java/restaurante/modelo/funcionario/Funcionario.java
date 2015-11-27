@@ -16,7 +16,7 @@ import restaurante.modelo.quadroHorarios.QuadroHorarios;
 /**
  * 
  * @author alkxly
- * @author IsaíasSantana
+ * @author Isaï¿½asSantana
  * @see 5 de novembro de 2015
  * @version 1.0
  */
@@ -34,7 +34,6 @@ public  class Funcionario implements Serializable {
 	private int cargaHorariaBase;
 	private transient int tipoFuncionario;
 	private String categoria;
-	
 	@Temporal(TemporalType.TIME)
 	private Date cargaHorariaTrabalhada;
 	@Temporal(TemporalType.TIME)
