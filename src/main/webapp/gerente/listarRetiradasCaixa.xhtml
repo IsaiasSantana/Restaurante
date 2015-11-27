@@ -1,0 +1,27 @@
+<ui:composition template="/WEB-INF/template/templateGerente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+			<main>
+				<h2>Retiradas</h2>
+				<section class="pedido">
+					<p:dataTable value="#{caixaRetiradaBean.listaRetiradas}" var="retiradas">
+						<p:column headerText="Valor">
+							<p:outputLabel value="#{retiradas.valor}"/>
+						</p:column>
+						<p:column headerText="Caixa">
+							<p:outputLabel value="#{retiradas.caixa.idCaixa}"/>
+						</p:column>
+						<p:column headerText="Funcionário responsável">
+							<p:outputLabel value="#{retiradas.responsavel}"/>
+						</p:column>
+					</p:dataTable>
+				</section>
+			</main>
+		</h:form>
+	</ui:define>
+</ui:composition>

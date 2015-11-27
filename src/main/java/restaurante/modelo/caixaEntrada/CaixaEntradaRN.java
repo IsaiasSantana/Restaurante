@@ -24,4 +24,9 @@ public class CaixaEntradaRN {
 	public List<Caixa> caixas(){
 		return caixaEntDAO.caixas();
 	}	
+	
+	public  List<CaixaEntrada> listaCaixaEntradas(){
+		return caixaEntDAO.listaCaixaEntradas();
+	}
+	
 }

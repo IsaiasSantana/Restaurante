@@ -35,5 +35,13 @@ public class CaixaEntradaDAOHibernate implements CaixaEntradaDAO {
 		List<Caixa> caixas = query.list();
 		return caixas;
 	}
-
+	
+	public  List<CaixaEntrada> listaCaixaEntradas(){
+		final String consulta = "SELECT * FROM caixa_entrada;";
+		Query query = session.createSQLQuery(consulta).addEntity(CaixaEntrada.class);
+		@SuppressWarnings("unchecked")
+		List<CaixaEntrada> caixas = query.list();
+		return caixas;
+	}
+	
 }

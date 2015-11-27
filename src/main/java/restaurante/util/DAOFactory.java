@@ -5,6 +5,8 @@ import restaurante.modelo.caixa.CaixaDAO;
 import restaurante.modelo.caixa.CaixaDAOHibernate;
 import restaurante.modelo.caixaEntrada.CaixaEntradaDAO;
 import restaurante.modelo.caixaEntrada.CaixaEntradaDAOHibernate;
+import restaurante.modelo.caixaRetirada.CaixaRetiradaDAO;
+import restaurante.modelo.caixaRetirada.CaixaRetiradaDAOHibernate;
 import restaurante.modelo.comanda.ComandaDAO;
 import restaurante.modelo.comanda.ComandaDAOHibernate;
 import restaurante.modelo.contato.ContatoDAO;
@@ -25,6 +27,12 @@ import restaurante.modelo.quadroHorarios.QuadroHorariosDAOHibernate;
 
 public class DAOFactory {
 	
+	
+	public static CaixaRetiradaDAO criarCaixaRetiradaDAO(){
+		CaixaRetiradaDAOHibernate cRDH = new CaixaRetiradaDAOHibernate();
+		cRDH.setSession(HibernateUtil.getSessionfactory().getCurrentSession());
+		return cRDH;
+	}
 	
 	public static CaixaEntradaDAO criarCaixaEntradaDAO(){
 		CaixaEntradaDAOHibernate cEDH = new CaixaEntradaDAOHibernate();

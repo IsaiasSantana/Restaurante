@@ -63,6 +63,10 @@ public class CaixaEntradaBean {
 		return new CaixaEntradaRN().caixas();
 	}
 	
+	public List<CaixaEntrada> getListaCaixaEntradas(){
+		return new CaixaEntradaRN().listaCaixaEntradas();
+	}
+	
 	public void setResponsavel(Funcionario funcionario){
 		this.funcionarioResponsavel = funcionario;
 	}

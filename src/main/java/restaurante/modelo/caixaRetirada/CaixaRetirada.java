@@ -12,7 +12,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import restaurante.modelo.caixa.Caixa;
-import restaurante.modelo.funcionario.Funcionario;
 
 /**
  * 
@@ -33,7 +32,7 @@ public class CaixaRetirada implements Serializable{
 	private double valor;
 	@ManyToOne
 	private Caixa caixa;
-	private Funcionario responsavel;
+	private Integer responsavel;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date timeStamp;
 	
@@ -63,10 +62,10 @@ public class CaixaRetirada implements Serializable{
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	public Funcionario getResponsavel() {
+	public Integer getResponsavel() {
 		return responsavel;
 	}
-	public void setResponsavel(Funcionario responsavel) {
+	public void setResponsavel(Integer responsavel) {
 		this.responsavel = responsavel;
 	}
 	public Date getTimeStamp() {

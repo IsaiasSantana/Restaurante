@@ -17,4 +17,11 @@ public interface CaixaEntradaDAO {
 	  * @return retorna todos os caixas disponíveis.
 	  */
 	 List<Caixa> caixas();
+	 
+	 /**
+	  * 
+	  * @return retorna uma lista com todas as entradas de comandas que irão entrar no caixa.
+	  */
+	 List<CaixaEntrada> listaCaixaEntradas();
+	 
 }
