@@ -29,4 +29,7 @@ public class CaixaEntradaRN {
 		return caixaEntDAO.listaCaixaEntradas();
 	}
 	
+	public double somarEntradas(){
+		return caixaEntDAO.somarEntradas();
+	}
 }

@@ -11,12 +11,16 @@ import restaurante.modelo.comanda.ComandaDAO;
 import restaurante.modelo.comanda.ComandaDAOHibernate;
 import restaurante.modelo.contato.ContatoDAO;
 import restaurante.modelo.contato.ContatoDAOHibernate;
+import restaurante.modelo.encomenda.EncomendaDAO;
+import restaurante.modelo.encomenda.EncomendaDAOHibernate;
 import restaurante.modelo.fornecedor.FornecedorDAO;
 import restaurante.modelo.fornecedor.FornecedorDAOHibernate;
 import restaurante.modelo.funcionario.FuncionarioDAO;
 import restaurante.modelo.funcionario.FuncionarioDAOHibernate;
 import restaurante.modelo.item.ItemDAO;
 import restaurante.modelo.item.ItemDAOHibernate;
+import restaurante.modelo.lote.LoteDAO;
+import restaurante.modelo.lote.LoteDAOHibernate;
 import restaurante.modelo.pedido.PedidoDAO;
 import restaurante.modelo.pedido.PedidoDAOHibernate;
 import restaurante.modelo.produto.ProdutoDAO;
@@ -27,6 +31,18 @@ import restaurante.modelo.quadroHorarios.QuadroHorariosDAOHibernate;
 
 public class DAOFactory {
 	
+	
+	public static LoteDAO criarLoteDAO(){
+		LoteDAOHibernate loteDAOH = new LoteDAOHibernate();
+		loteDAOH.setSession(HibernateUtil.getSessionfactory().getCurrentSession());
+		return loteDAOH;
+	}
+	
+	public static EncomendaDAO criarEncomendaDAO(){
+		EncomendaDAOHibernate encDAOH = new EncomendaDAOHibernate();
+		encDAOH.setSession(HibernateUtil.getSessionfactory().getCurrentSession());
+		return encDAOH;
+	}
 	
 	public static CaixaRetiradaDAO criarCaixaRetiradaDAO(){
 		CaixaRetiradaDAOHibernate cRDH = new CaixaRetiradaDAOHibernate();

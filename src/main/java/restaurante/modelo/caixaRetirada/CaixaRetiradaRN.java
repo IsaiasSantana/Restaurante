@@ -20,4 +20,7 @@ public class CaixaRetiradaRN {
 		return caixaRetiradaDAO.retiradas();
 	}
 	
+	public double somarRetiradas(){
+		return caixaRetiradaDAO.somarRetiradas();
+	}
 }

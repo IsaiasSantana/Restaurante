@@ -1,0 +1,152 @@
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+			<h:outputStylesheet library="css" name="style.css" />
+			<h:inputHidden value="#{loteBean.lote.idLote}"/>
+			<aside class="menu_gerente">
+				<h3>Olá Greedo!</h3>
+				<h4>O que deseja fazer?</h4>
+				<table>
+					<tr>
+						<td><h:link value="Retirada de item" /> <details>
+								<summary>Gerenciar Fornecedores</summary>
+								<table>
+									<tr>
+										<td><h:link value="Visualizar item" /></td>
+									</tr>
+									<tr>
+										<td><h:link value="Cadastrar Item" /></td>
+									</tr>
+								</table>
+							</details></td>
+					</tr>
+					<tr>
+						<td><h:link value="Encomendas" /></td>
+					</tr>
+					<tr>
+						<td><details>
+								<summary>Gerenciar Itens</summary>
+								<table>
+									<tr>
+										<td><h:link value="Listar itens" /></td>
+									</tr>
+									<tr>
+										<td><h:link value="Novo item"
+												outcome="cadastroItem" /></td>
+									</tr>
+								</table>
+							</details></td>
+					</tr>
+				</table>
+			</aside>
+			<main>
+			<h2>Listar Lotes</h2>
+			<section class="pedido">
+				<p:messages />
+				<p:dataTable id="listarLote"
+					value="#{loteBean.listaLote}" var="lote"
+					emptyMessage="Nenhum lote encontrado.">
+					<f:facet name="header">
+         			 	Lista de Lotes 
+      			 </f:facet>
+					<p:column headerText= "Código">
+						<h:outputText value="#{lote.idLote}" />
+					</p:column>
+					
+					<p:column headerText= "Item">
+						<h:outputText value="#{lote.getItem().nomeItem}" />
+					</p:column>
+					
+					<p:column headerText= "Tipo">
+						<h:outputText value="#{lote.getItem().tipoItem}" />
+					</p:column>
+					
+					<p:column headerText="Quantidade">
+						<h:outputText value="#{lote.qntdItens}" />
+					</p:column>
+					
+					<p:column headerText="Validade">
+						<h:outputText value="#{lote.validade}" />
+					</p:column>
+					
+					<p:column headerText="Chegada">
+						<h:outputText value="#{lote.chegada}" />
+					</p:column>
+					
+					<!--  <p:column headerText="Alterar">
+						<p:commandButton action="#{loteBean.editar}" icon="ui-icon-arrowrefresh-1-e" title="Alterar item"  process="@form"
+							update="@form">
+							<f:setPropertyActionListener value="#{item}"
+								target="#{itemBean.item}" />
+									     
+						</p:commandButton>
+					</p:column> -->
+					
+					<p:column headerText="Excluir">
+						<p:commandButton icon="ui-icon-trash" title="Excluir lote" 
+							action="#{loteBean.excluir()}" process="@form"
+							update="@form">
+							
+							<f:setPropertyActionListener value="#{lote}"
+								target="#{loteBean.loteSelecionado}" />
+
+							<p:confirm header="Exclusão de lote"
+								message="Tem certeza que deseja excluir o lote?"
+								icon="ui-icon-alert">
+							</p:confirm>
+
+						</p:commandButton>
+					</p:column> 
+					
+						
+				</p:dataTable>
+				
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Nao" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</section>
+			</main>
+
+
+			<aside class="login">
+				<table>
+					<tr>
+						<td><h1>Perfil</h1></td>
+					</tr>
+					<br />
+					<tr>
+						<td><h:graphicImage library="img" name="greedo.jpg"
+								width="130" height="160" /></td>
+					</tr>
+					<tr>
+						<td>Nome: Greedo</td>
+					</tr>
+					<tr>
+						<td>Função:Estoquista</td>
+					</tr>
+					<tr>
+						<td>Turno: Tarde</td>
+					</tr>
+					<tr>
+						<td>Entrada: 13:00</td>
+					</tr>
+					<tr>
+						<td>Saida: 22:00</td>
+					</tr>
+					<tr>
+						<td>botao de logout</td>
+					</tr>
+				</table>
+			</aside>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

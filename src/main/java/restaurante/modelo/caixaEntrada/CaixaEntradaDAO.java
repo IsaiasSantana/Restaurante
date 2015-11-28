@@ -24,4 +24,10 @@ public interface CaixaEntradaDAO {
 	  */
 	 List<CaixaEntrada> listaCaixaEntradas();
 	 
+	 /**
+	  * 
+	  * @return retorna o total de todas as entradas feitas no caixa de entrada.
+	  */
+	 double somarEntradas();
+	 
 }

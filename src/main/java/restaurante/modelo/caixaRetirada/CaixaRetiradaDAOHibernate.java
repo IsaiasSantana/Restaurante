@@ -33,6 +33,11 @@ public class CaixaRetiradaDAOHibernate implements CaixaRetiradaDAO{
 		
 	}
 	
+	@Override
+	public double somarRetiradas(){
+		final String consulta = "select sum(caxRet.valor)as total_retiradas from CaixaRetirada caxRet";
+		Query query = session.createQuery(consulta);
+		return (double) query.uniqueResult();
+	}
 	
-
 }

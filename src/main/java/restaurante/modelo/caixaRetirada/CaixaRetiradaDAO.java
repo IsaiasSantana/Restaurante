@@ -20,4 +20,10 @@ public interface CaixaRetiradaDAO {
 	 * apaga todas as retiradas do caixa.
 	 */
 	void zerarCaixaRetirada();
+	
+	/**
+	 * 
+	 * @return retorna todas as retiradas feitas do caixa.
+	 */
+	double somarRetiradas();
 }

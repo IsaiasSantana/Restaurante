@@ -1,0 +1,134 @@
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>
+			<h:outputStylesheet library="css" name="style.css" />
+			
+			<aside class="menu_gerente">
+				<h3>Olá Greedo!</h3>
+				<h4>O que deseja fazer?</h4>
+				<table>
+					<tr>
+						<td><a href="estoque.html">Retirada de Item </a> <details>
+								<summary>Gerenciar Itens</summary>
+								<table>
+									<tr>
+										<td><h:link value="Visualizar itens"/></td>
+									</tr>
+									<tr>
+										<td><h:link value="Cadastrar item"/></td>
+									</tr>
+								</table>
+							</details></td>
+					</tr>
+					<tr>
+						<td><h:link value="Encomendas"/></td>
+					</tr>
+					<tr>
+						<td><details>
+								<summary>Gerenciar Fornecedores</summary>
+								<table>
+									<tr>
+										<td><h:link value="Listar fornecedor" outcome="listarFornecedor"/></td>
+									</tr>
+									<tr>
+										<td><h:link value="Novo fornecedor" outcome="cadastroFornecedor"/></td>
+									</tr>
+								</table>
+							</details></td>
+					</tr>
+				</table>
+			</aside>
+			<main>
+			<h2>Cadastrar Encomenda</h2>
+			<section class="pedido">
+				<p:messages />
+				<table>
+					<tr>
+					
+					<h:inputHidden value="#{encomendaBean.fornecedor.idFornecedor}"/>
+					<h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5">
+					<p:outputLabel value="Fornecedor:" for="fornecedor" />	
+					      <p:selectOneMenu  value="#{encomendaBean.idFornecedor}" >
+					      	 	<f:selectItems id="fornecedor" value="#{encomendaBean.listaFornecedor}" var="fornecedor" 
+   							 itemLabel="#{fornecedor.nome}" itemValue="#{fornecedor.idFornecedor}"  />
+					       </p:selectOneMenu>
+					    </h:panelGrid>
+					
+					<h:inputHidden value="#{encomendaBean.funcionario.idFuncionario}"/>    
+					<h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5">	
+					      <p:outputLabel value="Funcionario:" for="funcionario" />
+					      <p:selectOneMenu  value="#{encomendaBean.idFuncionario}" itemLabel="#{funcionario.getFuncionario().nome}">
+					      	 	<f:selectItems id="funcionario" value="#{encomendaBean.listaFuncionario}" var="funcionario" 
+   							 itemLabel="#{funcionario.nome}" itemValue="#{funcionario.idFuncionario}"  />
+					       </p:selectOneMenu>
+					    </h:panelGrid>
+					    
+					    <h:inputHidden value="#{encomendaBean.item.idItem}"/>    
+					<h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5">	
+					      <p:outputLabel value="Item:" for="item" />
+					      <p:selectOneMenu  value="#{encomendaBean.idItem}" itemLabel="#{item.nomeItem}">
+					      	 	<f:selectItems id="item" value="#{encomendaBean.listaItem}" var="item" 
+   							 itemLabel="#{item.nomeItem}" itemValue="#{item.idItem}"  />
+					       </p:selectOneMenu>
+					    </h:panelGrid>
+					    
+					    <h:inputHidden value="#{encomendaBean.lote.qntdItens}"/>
+					    <h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5">	
+					        <p:outputLabel value="Quantidade:" for="qntd" />
+					        <p:inputText type="number"  id="qntd" style="width:30px" value="#{encomendaBean.lote.qntdItens}" required="true" requiredMessage= "Informe a quantidade de itens da encomenda!" >
+							</p:inputText>
+					    	</h:panelGrid>
+			
+					</tr>
+				
+					
+					<tr>
+						<td><p:commandButton value="salvar" update="@form"
+								process="@form" action="#{encomendaBean.salvarEncomenda}" /></td>
+					</tr>
+					
+				</table>
+			</section>
+			</main>
+			<aside class="login">
+				<table>
+					<tr>
+						<td><h1>Perfil</h1> <br></br></td>
+					</tr>
+					<tr>
+						<td><h:graphicImage library="img" name="greedo.jpg"
+								width="130" height="160" /></td>
+					</tr>
+					<tr>
+						<td><b>Nome:</b> Greedo</td>
+					</tr>
+					<tr>
+						<td><b>Função:</b> Estoquista</td>
+					</tr>
+					<tr>
+						<td><b>Turno:</b> Tarde</td>
+					</tr>
+					<tr>
+						<td><b>Entrada:</b> 13:00</td>
+					</tr>
+					<tr>
+						<td><b>Saida:</b> 22:00</td>
+					</tr>
+					<tr>
+						<td>ss</td>
+					</tr>
+					<tr>
+						<td><p:commandButton value="Logout" update="@form"
+								process="@form" /></td>
+					</tr>
+				</table>
+			</aside>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -3,6 +3,7 @@ package restaurante.controle;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
@@ -18,9 +19,11 @@ import restaurante.util.Mensagens;
  *
  */
 @ManagedBean
+@ApplicationScoped
 public class CaixaBean {
 	private Caixa caixa;
 	private Funcionario funcionarioResponsavel;
+	private double totalEntrada, totalSaida;
 	
 	private List<Caixa> caixas;
 	
@@ -35,6 +38,16 @@ public class CaixaBean {
 	}
 
 	
+	
+	
+	public double getTotalEntrada() {
+		return totalEntrada;
+	}
+
+	public double getTotalSaida() {
+		return totalSaida;
+	}
+
 	public Funcionario getFuncionarioResponsavel() {
 		return funcionarioResponsavel;
 	}
@@ -112,6 +125,17 @@ public class CaixaBean {
 		}
 		funcionarioResponsavel = new Funcionario();
 		caixa = new Caixa();		
+	}
+	
+	/**
+	 * Fecha o caixa do dia, faz a soma de todas entradas, todas as saídas, calcula
+	 * A diferença entre entradas-saídas e insere o valor arrecadado no caixa.
+	 */
+	public void fecharCaixa(){
+		final double[] valores = new CaixaRN().fecharCaixa();
+		caixa.setTotalCaixa(valores[0]-valores[1]);
+		totalEntrada = valores[0];
+		totalSaida = valores[1];
 	}
 	
 }

@@ -1,0 +1,33 @@
+<ui:composition template="/WEB-INF/template/templateGerente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="conteudo">
+		<h:form>	
+			<main>     
+				<section class="pedido">
+					<h1> <p:outputLabel value="Fechamento do caixa do dia"/>  </h1>
+					<table>
+						<tr>
+							<td>
+								<p:panelGrid columns="3" rendered="#{caixaBean.totalEntrada > 0}">
+									<p:outputLabel value="Total de entradas"/>
+									<p:outputLabel value="Total de saídas"/>
+									<p:outputLabel value="Total do caixa"/>
+									<p:outputLabel value="#{caixaBean.totalEntrada}"/>
+									<p:outputLabel value="#{caixaBean.totalSaida}"/>
+									<p:outputLabel value="#{caixaBean.caixa.totalCaixa}"/>
+								</p:panelGrid>
+							</td>
+						
+						</tr>
+					</table>
+					
+					<p:commandButton value="fechar caixa" ajax="false" action="#{caixaBean.fecharCaixa()}"/>
+				</section>
+			</main>
+		</h:form>
+	</ui:define>
+</ui:composition>

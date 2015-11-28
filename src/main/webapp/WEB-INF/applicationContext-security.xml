@@ -7,8 +7,8 @@
        http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http auto-config="true">
-		<intercept-url pattern="/estoquista/**" access="ROLE_ESTOQUISTA" />
-		<intercept-url pattern="/gerente/**" access="ROLE_GERENTE" />
+	<!-- 	<intercept-url pattern="/estoquista/**" access="ROLE_ESTOQUISTA" /> -->
+		<!-- <intercept-url pattern="/gerente/**" access="ROLE_GERENTE" /> -->
 		<form-login login-page="/public/login.jsf"
 			always-use-default-target="true" default-target-url="/restrito/principal.jsf"
 			authentication-failure-url="/public/login.jsf?login_error=1" />
