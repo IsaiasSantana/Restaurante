@@ -95,6 +95,11 @@ public class FuncionarioBean {
 		
 	}
 	
+	public String getHoraMontada(){
+		if (quadroHorario.getIdQuadroHorarios() == null) return "Selecione";
+		else return quadroHorario.getIdQuadroHorarios().toString();
+	}
+	
 	
 	public QuadroHorarios getQuadroHorario() {
 		return quadroHorario;

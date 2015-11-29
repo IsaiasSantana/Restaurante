@@ -3,16 +3,15 @@ package restaurante.modelo.pedido;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import restaurante.modelo.comanda.Comanda;
-
 import restaurante.modelo.produto.Produto;
 
 
@@ -34,7 +33,8 @@ public class Pedido implements Serializable{
 	@GeneratedValue
 	private Integer idPedido;
 	
-	@ManyToOne (cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
+	@ManyToOne
+	@JoinColumn(name="idComanda")
 	private Comanda comanda;
 	
 	

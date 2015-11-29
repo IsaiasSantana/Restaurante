@@ -7,6 +7,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import restaurante.modelo.caixaEntrada.CaixaEntrada;
+import restaurante.modelo.caixaEntrada.CaixaEntradaRN;
 import restaurante.modelo.comanda.Comanda;
 import restaurante.modelo.comanda.ComandaRN;
 import restaurante.modelo.pedido.Pedido;
@@ -172,9 +174,9 @@ public class ComandaBean {
 	       		
 	    		PedidoRN pedidoRN = new PedidoRN();	
 	    		ComandaRN comandaRN = new ComandaRN();
-	    		
+	    		pedidoRN.salvar(pedido);
 	    		comandaRN.salvar(comanda);
-	    		pedidoRN.salvar(pedido);	
+	    			
 	    		Mensagens.adicionarMensagemConfirmacao("Comanda cadastrada com sucesso");
 	    		
 	    		this.pedido = new Pedido();
@@ -188,10 +190,10 @@ public class ComandaBean {
 	public double calcularComanda(){
 		double total = 0;
 		
-		for(Pedido pedidoTMP : this.comanda.getListaPedidos()){
-			total = pedidoTMP.getQntd()* pedidoTMP.getProduto().getPreco();
-		}
-		
+//		for(Pedido pedidoTMP : this.comanda.getListaPedidos()){
+//			total = pedidoTMP.getQntd()* pedidoTMP.getProduto().getPreco();
+//		}
+//		
 		return total;
 	}
 	
@@ -210,7 +212,15 @@ public class ComandaBean {
 		comandaRN.salvar(comanda);
 		return "fecharComanda";
 	}
+	/**
+	 * Paga a comanda e insere ela dentro do caixa de entrada.
+	 * @return
+	 */
 	 public String pagarComanda(){
+		 
+		 double soma = 0.0;
+		 
+		 System.out.println("Vai pagar");
 		 
 		 //trecho de código para verificar a comanda a ser paga
 		 for(Comanda comanda : listaComanda){
@@ -220,17 +230,38 @@ public class ComandaBean {
          }
 		 
 		 ComandaRN comandaRN = new ComandaRN();
+		 PedidoRN pedidoRN = new PedidoRN();
 		 
+		 //Mudei a query de pesquisa de listar pedidos
 		 for (Pedido pedido : comandaRN.listarPedidos(comanda)){
-			  //pedido.setComanda(null);
-			 System.out.println(pedido.getIdPedido());
-			 //PedidoRN pedidoRN = new PedidoRN();
-			 //pedidoRN.salvar(pedido);
-			 //pedidoRN.excluir(pedido);
+			 System.out.println("Pedido = "+pedido.getIdPedido());
+			 soma+=pedido.getProduto().getPreco() * pedido.getQntd();
+			 Pedido aux = pedido;
+			 pedidoRN.excluir(aux); //exclui todos os pedidos dessa comanda em específica.
+		 }		 
+
+		
+		 CaixaEntradaRN caixaEntRN = new CaixaEntradaRN(); //Preciso ter um caixa cadastrado.
+		 CaixaEntrada entradaCaixa = new CaixaEntrada();
+		 
+		 //Configura uma nova entrada no caixa de entrada
+		 entradaCaixa.setCaixa(caixaEntRN.caixas().get(0)); //retorna uma lista, mas só existe um caixa.
+		 entradaCaixa.setRotulo("CPM-"+comanda.getnMesa()); //comanda paga da mesa-numero
+		 entradaCaixa.setCartao(false); // pago a dinheiro.
+		 entradaCaixa.setTimeStamp(new Timestamp(System.currentTimeMillis())); // hora que foi pago
+		 entradaCaixa.setValor(soma); // valor pago
+		 
+		 //Salva no caixa de entrada, mas não no caixa principal ainda. Mas tem a referência para qual caixa o dinheiro deve entrar
+		 //Por consequencia quando somar todas as entradas do caixa de entrada insere no caixa principal.
+		 try{
+			 caixaEntRN.cadastradaEntradaCaixa(entradaCaixa);
+			 Mensagens.adicionarMensagemConfirmacao("Comanda paga com sucesso.");
+		 }
+		 catch(Exception e){
+			 Mensagens.adicionarMensagemErro("Erro ao pagar a comanda");
 		 }
 		 
-		
-		//comandaRN.excluir(comanda);
+		 comandaRN.excluir(comanda);
 		 return "listaComandasInativas";
 	 }
 	 

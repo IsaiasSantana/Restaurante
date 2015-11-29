@@ -1,15 +1,13 @@
 package restaurante.modelo.caixaRetirada;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import restaurante.modelo.caixa.Caixa;
 
@@ -33,8 +31,7 @@ public class CaixaRetirada implements Serializable{
 	@ManyToOne
 	private Caixa caixa;
 	private Integer responsavel;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date timeStamp;
+	private Timestamp timeStamp;
 	
 	
 	
@@ -68,10 +65,10 @@ public class CaixaRetirada implements Serializable{
 	public void setResponsavel(Integer responsavel) {
 		this.responsavel = responsavel;
 	}
-	public Date getTimeStamp() {
+	public Timestamp getTimeStamp() {
 		return timeStamp;
 	}
-	public void setTimeStamp(Date timeStamp) {
+	public void setTimeStamp(Timestamp timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 	@Override

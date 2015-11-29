@@ -32,7 +32,8 @@ public class Comanda implements Serializable{
 	private Integer nMesa;
 	private String responsavel;
 	
-	@OneToMany (mappedBy = "comanda", cascade= CascadeType.ALL, orphanRemoval = true)
+
+	@OneToMany(mappedBy = "comanda", targetEntity = Pedido.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Pedido> listaPedidos;
 	
 	private Boolean comandaInativa;

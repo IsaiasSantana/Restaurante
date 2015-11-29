@@ -28,7 +28,7 @@
 				<table>
 					<tr>
 						<td><p:outputLabel value="Nome " for="nome" /></td>
-						<td><p:inputText id="nome" required="true"
+						<td><p:inputText id="nome" required="true" 
 								requiredMessage="O funcionário deve possuir um nome."
 								value="#{funcionarioBean.funcionario.nome}" /></td>
 					</tr>
@@ -104,7 +104,8 @@
 						</td>
 						
 						<td>
-							<p:commandButton value="Selecionar" type="button" onclick="PF('dlg2').show();" />
+							 <p:commandButton value="Selecionar" type="button" onclick="PF('dlg2').show();" />
+							<!--<p:inputText id="qh" onclick="PF('dlg2').show();" required="true" requiredMessage="É preciso de um quadro de horário para o funcionario."/>-->
 							<p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
 									<p:dataTable id="listarFornecedor"
 										value="#{quadroHorariosBean.quadroHorariosList}" var="QuadroHorario"
@@ -123,7 +124,7 @@
 										</p:column>
 										
 										<p:column headerText="Selecionar">
-											<p:commandButton action="#{funcionarioBean.escolherQuadroHorario}" icon="ui-icon-arrowrefresh-1-e" title="Selecionar quadro de horário do funcionário."  onclick="PF('dlg2').hide();">
+											<p:commandButton  partialSubmit="true" action="#{funcionarioBean.escolherQuadroHorario}" value="Selecionar" title="Selecionar quadro de horário do funcionário."  onclick="PF('dlg2').hide();">
 												<f:setPropertyActionListener value="#{QuadroHorario}"
 													target="#{funcionarioBean.quadroHorario}" />
 											</p:commandButton>

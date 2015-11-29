@@ -61,11 +61,14 @@ public class ComandaDAOHibernate implements ComandaDAO{
 		return lista;
 	}
 
+	
 	@Override
 	public List<Pedido> listarPedidos(Comanda comanda) {
-		Query queryHql =  this.session.createQuery("FROM comanda.listaPedidos");
-		queryHql.setParameter("comanda", comanda);
+		Query queryHql =  this.session.createSQLQuery("SELECT * FROM pedido as p WHERE p.idComanda = "+comanda.getIdComanda()).addEntity(Pedido.class);
+		@SuppressWarnings("unchecked")
 		List<Pedido> lista = queryHql.list();
 		return lista;
 	}
+
+	
 }
