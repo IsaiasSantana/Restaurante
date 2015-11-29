@@ -218,7 +218,7 @@ public class ComandaBean {
 	 */
 	 public String pagarComanda(){
 		 
-		 double soma = 0.0;
+		 double soma = 0.0; 
 		 
 		 System.out.println("Vai pagar");
 		 
