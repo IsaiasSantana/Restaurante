@@ -190,10 +190,10 @@ public class ComandaBean {
 	public double calcularComanda(){
 		double total = 0;
 		
-//		for(Pedido pedidoTMP : this.comanda.getListaPedidos()){
-//			total = pedidoTMP.getQntd()* pedidoTMP.getProduto().getPreco();
-//		}
-//		
+		for(Pedido pedidoTMP : this.comanda.getListaPedidos()){
+			total = pedidoTMP.getQntd()* pedidoTMP.getProduto().getPreco();
+		}
+		
 		return total;
 	}
 	

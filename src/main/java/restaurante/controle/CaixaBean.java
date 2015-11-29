@@ -21,12 +21,15 @@ import restaurante.util.Mensagens;
 @ManagedBean
 @ApplicationScoped
 public class CaixaBean {
+	
 	private Caixa caixa;
 	private Funcionario funcionarioResponsavel;
 	private double totalEntrada, totalSaida;
-	
 	private List<Caixa> caixas;
 	
+	/**
+	 * Construtor, inicializa algumas variáveis do caixa.
+	 */
 	public CaixaBean(){
 		init();
 	}
@@ -37,9 +40,6 @@ public class CaixaBean {
 		funcionarioResponsavel = new Funcionario();
 	}
 
-	
-	
-	
 	public double getTotalEntrada() {
 		return totalEntrada;
 	}
