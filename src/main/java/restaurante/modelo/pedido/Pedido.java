@@ -47,9 +47,6 @@ public class Pedido implements Serializable{
 	private Timestamp horaRealizado;
 	private Timestamp horaAtendido;
 	
-	//@ManyToOne
-	//private Garcom garcomResponsavel;
-	
 	
 	/**
 	 * 

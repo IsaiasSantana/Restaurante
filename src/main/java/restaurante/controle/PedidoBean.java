@@ -27,8 +27,6 @@ public class PedidoBean {
 	private List<Pedido> listaPedido;
 	private List<Pedido> listaPedidoRefeicao;
 	private List<Pedido> listaPedidoRefeicaoEspera;
-	private List<Pedido> listaPedidoRefeicaoPreparo;
-	private List<Pedido> listaPedidoRefeicaoPronta;
 	private List<Pedido> listaPedidoBebida;
 	private Produto produto;
 	private List<Produto> listaProduto;
@@ -45,8 +43,6 @@ public class PedidoBean {
 		this.listaProduto = new ArrayList<Produto>();
 		this.listaPedidoRefeicao = new ArrayList<Pedido>();
 		this.listaPedidoRefeicaoEspera = new ArrayList<Pedido>();
-		this.listaPedidoRefeicaoPreparo = new ArrayList<Pedido>();
-		this.listaPedidoRefeicaoPronta = new ArrayList<Pedido>();
 		this.listaPedidoBebida = new ArrayList<Pedido>();
 		this.comanda = new Comanda();
 		this.listaComanda = new ArrayList<Comanda>();
@@ -131,22 +127,6 @@ public class PedidoBean {
 
 	public void setListaPedidoRefeicaoEspera(List<Pedido> listaPedidoRefeicaoEspera) {
 		this.listaPedidoRefeicaoEspera = listaPedidoRefeicaoEspera;
-	}
-
-	public List<Pedido> getListaPedidoRefeicaoPreparo() {
-		return listaPedidoRefeicaoPreparo;
-	}
-
-	public void setListaPedidoRefeicaoPreparo(List<Pedido> listaPedidoRefeicaoPreparo) {
-		this.listaPedidoRefeicaoPreparo = listaPedidoRefeicaoPreparo;
-	}
-
-	public List<Pedido> getListaPedidoRefeicaoPronta() {
-		return listaPedidoRefeicaoPronta;
-	}
-
-	public void setListaPedidoRefeicaoPronta(List<Pedido> listaPedidoRefeicaoPronta) {
-		this.listaPedidoRefeicaoPronta = listaPedidoRefeicaoPronta;
 	}
 
 	public List<Pedido> getListaPedidoBebida() {
@@ -239,7 +219,7 @@ public class PedidoBean {
 		PedidoRN pedidoRN = new PedidoRN();
 		pedidoRN.salvar(this.pedido);
 		this.listaPedidoBebida.removeAll(listaPedidoBebida);
-		this.listaPedidoRefeicaoPronta.removeAll(listaPedidoRefeicaoEspera);
+		this.listaPedidoRefeicaoEspera.removeAll(listaPedidoRefeicaoEspera);
 		Mensagens.adicionarMensagemConfirmacao("Pedido marcado como atendido");
 		return null;
 	}
@@ -269,11 +249,4 @@ public class PedidoBean {
 		return "/listaPedidos";
 	}
 	
-	public String emPreparo(){
-		this.listaPedidoRefeicaoEspera.remove(this.pedido);
-		this.listaPedidoRefeicaoPreparo.add(this.pedido);
-		return null;
-		
-		
-	}
 }

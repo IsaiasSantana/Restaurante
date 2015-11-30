@@ -39,10 +39,5 @@ public class PedidoRN {
 	public List<Pedido> listarNaoAtendidos() {
 		return this.pedidoDAO.listarNaoAtendidos();
 	}
-	public List<Pedido> listarPedidosRefeicaoNaoAtendidos() {
-		return this.pedidoDAO.listarPedidosRefeicaoNaoAtendidos();
-	}
-	public List<Pedido> listarPedidosBebidaNaoAtendidos() {
-		return this.pedidoDAO.listarPedidosBebidaNaoAtendidos();
-	}
+	
 }

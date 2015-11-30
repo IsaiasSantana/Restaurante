@@ -15,6 +15,4 @@ public interface PedidoDAO {
 	public void atualizar (Pedido pedido);
 	public List<Pedido> listar();
 	public List<Pedido> listarNaoAtendidos();
-	public List<Pedido> listarPedidosRefeicaoNaoAtendidos();
-	public List<Pedido> listarPedidosBebidaNaoAtendidos();
 }

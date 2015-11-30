@@ -36,24 +36,7 @@
 		<aside class = "menu">
 				<h2>Olá Jabba O Hutt!</h2>
 				=========================================
-				<p:dataTable id="listaPedidosRefeicaoPreparo" value="#{pedidoBean.listaPedidoRefeicaoPreparo}" var="pedidoRefeicao" 
-					emptyMessage="Nenhum pedido cadastrado!" >
-						<f:facet name="header">
-         			 	Refeições Em Preparo
-      					 </f:facet>
-						<p:column headerText="Nome">
-							<h:outputText value="#{pedidoRefeicao.getProduto().nome}" />
-						</p:column>
-						<p:column headerText="Qntd" style="width :25px">
-							<h:outputText value="#{pedidoRefeicao.getQntd()}" />
-						</p:column>	
-						<p:column headerText="Pronta" style="width :35px">
-						 <h:commandButton value=" "  action="#{pedidoBean.pronta}" >
-							<f:setPropertyActionListener value="#{pedidoRefeicao}" target="#{pedidoBean.pedido}">
-							</f:setPropertyActionListener>
-						</h:commandButton>
-						</p:column>
-				</p:dataTable>	
+				
 			</aside>
 		
 			<main>
@@ -80,13 +63,6 @@
 						<p:column headerText="Qntd" style="width :25px">
 							<h:outputText value="#{pedidoRefeicao.getQntd()}" />
 						</p:column>		
-						
-						<p:column headerText="Preparo" style="width :50px">
-						 <h:commandButton value=" "  action="#{pedidoBean.emPreparo}" >
-							<f:setPropertyActionListener value="#{pedidoRefeicao}" target="#{pedidoBean.pedido}">
-							</f:setPropertyActionListener>
-						</h:commandButton>
-					</p:column>	
 				</p:dataTable>	
 		
 				     </div>

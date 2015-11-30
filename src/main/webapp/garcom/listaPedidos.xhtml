@@ -94,46 +94,6 @@
 						</p:column>
 						<p:column headerText="Qntd" style="width :25px">
 							<h:outputText value="#{pedidoRefeicao.getQntd()}" />
-						</p:column>							
-				</p:dataTable>	
-				</h:form>
-				<h:form>
-				<p:dataTable id="listaPedidosRefeicaoPreparo" value="#{pedidoBean.listaPedidoRefeicaoPreparo}" var="pedidoRefeicao" 
-					emptyMessage="Nenhum pedido cadastrado!" >
-						<f:facet name="header">
-         			 	Refeições Em Preparo
-      					 </f:facet>
-						<p:column headerText="Cod." style="width :20px">
-							<h:outputText value="#{pedidoRefeicao.getProduto().idProduto}" />
-						</p:column>
-						<p:column headerText="Com." style="width :25px">
-							<h:outputText value="#{pedidoRefeicaoPreparo.getComanda().idComanda}" />
-						</p:column>
-						<p:column headerText="Nome">
-							<h:outputText value="#{pedidoRefeicao.getProduto().nome}" />
-						</p:column>
-						<p:column headerText="Qntd" style="width :25px">
-							<h:outputText value="#{pedidoRefeicao.getQntd()}" />
-						</p:column>		
-				</p:dataTable>	
-				</h:form>
-				<h:form>
-				<p:dataTable id="listaPedidosRefeicaoPronta" value="#{pedidoBean.listaPedidoRefeicaoPronta}" var="pedidoRefeicao" 
-					emptyMessage="Nenhum pedido cadastrado!" >
-						<f:facet name="header">
-         			 	Refeições Prontas!
-      					 </f:facet>
-						<p:column headerText="Cod." style="width :20px">
-							<h:outputText value="#{pedidoRefeicao.getProduto().idProduto}" />
-						</p:column>
-						<p:column headerText="Com." style="width :25px">
-							<h:outputText value="#{pedidoRefeicaoPronta.getComanda().idComanda}" />
-						</p:column>
-						<p:column headerText="Nome">
-							<h:outputText value="#{pedidoRefeicao.getProduto().nome}" />
-						</p:column>
-						<p:column headerText="Qntd" style="width :25px">
-							<h:outputText value="#{pedidoRefeicao.getQntd()}" />
 						</p:column>		
 						<p:column headerText="Atendido" style="width :50px">
 						 <h:commandButton value=" "  action="#{pedidoBean.marcarAtendido}" process="@form"
@@ -141,7 +101,7 @@
 							<f:setPropertyActionListener target="#{pedidoBean.pedido}" value="#{pedido}" >
 							</f:setPropertyActionListener>
 						</h:commandButton>
-					</p:column>	
+					</p:column>						
 				</p:dataTable>	
 				</h:form>
 				     </div>
