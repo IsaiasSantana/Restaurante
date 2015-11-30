@@ -13,15 +13,21 @@
 				<h4>O que deseja fazer?</h4>
 				<table>
 					<tr>
-						<td><details>
+						<td><a href="estoque.html">Retirada de Item </a> <details>
 								<summary>Gerenciar Itens</summary>
 								<table>
 									<tr>
-										<td><h:link value="Visualizar itens" outcome="listarItem.jsf"/></td>
+										<td><h:link value="Visualizar itens"/></td>
 									</tr>
 									<tr>
-										<td><h:link value="Cadastrar item" outcome="cadastroItem.jsf"/></td>
+										<td><h:link value="Cadastrar encomenda"/></td>
 									</tr>
+									
+									<tr>
+										<td><h:link value="Cadastrar item"/></td>
+									</tr>
+									
+									
 								</table>
 							</details></td>
 					</tr>
@@ -44,43 +50,34 @@
 				</table>
 			</aside>
 			<main>
-			<h2>Cadastrar Encomenda</h2>
+			<h2>Registrar Retirada</h2>
 			<section class="pedido">
 				<p:messages />
 				<table>
 					<tr>
-					
-					<h:inputHidden value="#{encomendaBean.fornecedor.idFornecedor}"/>
-					<h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5">
-					<p:outputLabel value="Fornecedor:" for="fornecedor" />	
-					      <p:selectOneMenu  value="#{encomendaBean.idFornecedor}" >
-					      	 	<f:selectItems id="fornecedor" value="#{encomendaBean.listaFornecedor}" var="fornecedor" 
-   							 itemLabel="#{fornecedor.nome}" itemValue="#{fornecedor.idFornecedor}"  />
-					       </p:selectOneMenu>
-					    </h:panelGrid>
-					
-					<h:inputHidden value="#{encomendaBean.funcionario.idFuncionario}"/>    
+				
+					<h:inputHidden value="#{retiradaItemBean.funcionario.idFuncionario}"/>    
 					<h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5">	
 					      <p:outputLabel value="Funcionario:" for="funcionario" />
-					      <p:selectOneMenu  value="#{encomendaBean.idFuncionario}" itemLabel="#{funcionario.getFuncionario().nome}">
-					      	 	<f:selectItems id="funcionario" value="#{encomendaBean.listaFuncionario}" var="funcionario" 
+					      <p:selectOneMenu  value="#{retiradaItemBean.idFuncionario}" itemLabel="#{funcionario.getFuncionario().nome}">
+					      	 	<f:selectItems id="funcionario" value="#{retiradaItemBean.listaFuncionario}" var="funcionario" 
    							 itemLabel="#{funcionario.nome}" itemValue="#{funcionario.idFuncionario}"  />
 					       </p:selectOneMenu>
 					    </h:panelGrid>
 					    
-					    <h:inputHidden value="#{encomendaBean.item.idItem}"/>    
+					    <h:inputHidden value="#{retiradaItemBean.item.idItem}"/>    
 					<h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5">	
 					      <p:outputLabel value="Item:" for="item" />
-					      <p:selectOneMenu  value="#{encomendaBean.idItem}" itemLabel="#{item.nomeItem}">
-					      	 	<f:selectItems id="item" value="#{encomendaBean.listaItem}" var="item" 
+					      <p:selectOneMenu  value="#{retiradaItemBean.idItem}" itemLabel="#{item.nomeItem}">
+					      	 	<f:selectItems id="item" value="#{retiradaItemBean.listaItem}" var="item" 
    							 itemLabel="#{item.nomeItem}" itemValue="#{item.idItem}"  />
 					       </p:selectOneMenu>
 					    </h:panelGrid>
 					    
-					    <h:inputHidden value="#{encomendaBean.lote.qntdItens}"/>
+					    <h:inputHidden value="#{retiradaItemBean.item.quantidade}"/>
 					    <h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5">	
 					        <p:outputLabel value="Quantidade:" for="qntd" />
-					        <p:inputText type="number"  id="qntd" style="width:30px" value="#{encomendaBean.lote.qntdItens}" required="true" requiredMessage= "Informe a quantidade de itens da encomenda!" >
+					        <p:inputText type="number"  id="qntd" style="width:30px" value="#{retiradaItemBean.quantidadeItens}" required="true" requiredMessage= " Informe quantos itens serão retirados!" >
 							</p:inputText>
 					    	</h:panelGrid>
 			
@@ -89,7 +86,7 @@
 					
 					<tr>
 						<td><p:commandButton value="salvar" update="@form"
-								process="@form" action="#{encomendaBean.salvarEncomenda}" /></td>
+								process="@form" action="#{retiradaItemBean.salvarRetiradaItem}" /></td>
 					</tr>
 					
 				</table>

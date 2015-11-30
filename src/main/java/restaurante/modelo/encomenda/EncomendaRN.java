@@ -7,7 +7,7 @@ import restaurante.util.DAOFactory;
 
 /**
  * 
- * @author dgaramos
+ * @author thiago
  * @version 1.0
  */
 
@@ -40,5 +40,9 @@ public class EncomendaRN {
 	
 	public Encomenda carregar(Integer idEncomenda){
 		return this.encomendaDAO.carregar(idEncomenda);
+	}
+	
+	public void alterar(Encomenda encomenda){
+		this.encomendaDAO.alterar(encomenda);
 	}
 }

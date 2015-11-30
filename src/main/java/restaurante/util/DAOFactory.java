@@ -27,10 +27,18 @@ import restaurante.modelo.produto.ProdutoDAO;
 import restaurante.modelo.produto.ProdutoDAOHibernate;
 import restaurante.modelo.quadroHorarios.QuadroHorariosDAO;
 import restaurante.modelo.quadroHorarios.QuadroHorariosDAOHibernate;
+import restaurante.modelo.retiradaitem.RetiradaItemDAO;
+import restaurante.modelo.retiradaitem.RetiradaItemDAOHibernate;
 
 
 public class DAOFactory {
 	
+	
+	public static RetiradaItemDAO criarRetiradaItemDAO(){
+		RetiradaItemDAOHibernate retiradaItemDAO = new RetiradaItemDAOHibernate();
+		retiradaItemDAO.setSession(HibernateUtil.getSessionfactory().getCurrentSession());
+		return retiradaItemDAO;
+	}
 	
 	public static LoteDAO criarLoteDAO(){
 		LoteDAOHibernate loteDAOH = new LoteDAOHibernate();

@@ -45,6 +45,7 @@ public class EncomendaDAOHibernate implements EncomendaDAO{
 	public List<Encomenda> listarEncomendas() {
 		// TODO Auto-generated method stub
 		Query querySql = this.session.createSQLQuery("select * from encomenda order by idEncomenda asc").addEntity(Encomenda.class);
+		@SuppressWarnings("unchecked")
 		List<Encomenda> lista = querySql.list();
 		return lista;
 	}

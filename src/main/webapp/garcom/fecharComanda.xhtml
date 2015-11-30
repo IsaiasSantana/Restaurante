@@ -78,16 +78,11 @@
 							</h:outputText>
 						</p:column>	
 						<f:facet name="footer">
-         			 	Total: R$ #{comandaBean.calcularComanda()}
+         			  	Total: R$ #{comandaBean.calcularComanda()} 
       					 </f:facet>
 				</p:dataTable>	
 				
-				<h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5">	
-					        <p:outputLabel value="Desconto (%):" for="desconto" />
-					        <p:inputText type="number"  id="desconto" style="width:30px" >
-							</p:inputText> 
-							
-					    </h:panelGrid>
+
 				     </div>
 					<p:commandButton value="Pagar Comanda" update="@form"
 					process="@form"  action="#{comandaBean.pagarComanda()}">

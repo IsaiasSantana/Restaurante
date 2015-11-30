@@ -25,10 +25,16 @@ public class CaixaRetiradaBean {
 		this.caixaRetirada = caixaRetirada;
 	}
 	
+	/**
+	 * @return uma lista com todas as retiradas de dinheiro do caixa.
+	 */
 	public List<CaixaRetirada> getListaRetiradas(){
 		return new CaixaRetiradaRN().retiradas();
 	}
 	
+	/**
+	 * Salva uma retirada de dinheiro no caixa de saída.
+	 */
 	public void salvar(){
 		if(caixaRetirada != null){
 			System.out.println(caixaRetirada.getValor());

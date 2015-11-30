@@ -1,30 +1,16 @@
 package restaurante.modelo.encomenda;
 
-import restaurante.modelo.fornecedor.Fornecedor;
-import restaurante.modelo.funcionario.Funcionario;
-import restaurante.modelo.item.Item;
-import restaurante.modelo.lote.Lote;
-
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-//import javax.persistence.OneToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-//import javax.persistence.OneToOne;
-import javax.persistence.OneToOne;
+import restaurante.modelo.fornecedor.Fornecedor;
+import restaurante.modelo.funcionario.Funcionario;
+import restaurante.modelo.item.Item;
+import restaurante.modelo.lote.Lote;
 
 /**
  * 
@@ -224,6 +210,7 @@ public class EncomendaLote implements Serializable{
 	public List<EncomendaLote> listarEncomendas() {
 		// TODO Auto-generated method stub
 		Query querySql = this.session.createSQLQuery("select * from encomenda join lote on encomenda.idEncomenda = lote.idLote");
+		@SuppressWarnings("unchecked")
 		List<EncomendaLote> lista = querySql.list();
 		return lista;
 	}

@@ -17,6 +17,7 @@ import restaurante.modelo.item.Item;
 /**
  * 
  * @author Thiago
+ * @author isaiasSantana
  * @version 1.0
  */
 
@@ -32,7 +33,7 @@ public class Lote implements Serializable {
 	
 	private Integer qntdItens;
 	
-	private Date validade; // informe o tipo do date, se é apenas horas ou ou timestamp.
+	private Date validade; 
 	
 	private Boolean chegada;
 	
@@ -41,7 +42,7 @@ public class Lote implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "idEncomenda")
-	private Encomenda encomenda; //Você não colocou esse mapeamento, ele é obrigatório.
+	private Encomenda encomenda; 
 
 	public Integer getIdLote() {
 		return idLote;
@@ -155,14 +156,4 @@ public class Lote implements Serializable {
 		return "Lote [idLote=" + idLote + ", qntdItens=" + qntdItens + ", validade=" + validade + ", chegada=" + chegada
 				+ ", item=" + item + ", encomenda=" + encomenda + "]";
 	}
-
-	
-
-	
-
-	
-
-	
-	
-
 }
