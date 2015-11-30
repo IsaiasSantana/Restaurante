@@ -31,11 +31,18 @@ public class FuncionarioBean {
 		funcionarioSelecionado = new Funcionario();
 	}
 	
+	/**
+	 * Configura um quadro de horário para o funcionário.
+	 */
 	public void escolherQuadroHorario()
 	{
 		funcionario.setQuadroHorario(quadroHorario);
 	}
 	
+	/**
+	 * Salva um novo funcionário no banco caso não exista, se existir apenas é atualizado os seus valores.
+	 * @return
+	 */
 	public String salvar(){
 		String pagina = null;
 		
@@ -69,6 +76,9 @@ public class FuncionarioBean {
 		return "cadastrarFuncionario";
 	}
 	
+	/**
+	 * Exclui um funcionario do sistema.
+	 */
 	public void excluir(){
 		FuncionarioRN funcRN = new FuncionarioRN();
 		try{
@@ -79,27 +89,22 @@ public class FuncionarioBean {
 		Mensagens.adicionarMensagemConfirmacao("Funcionário excluido com sucesso!");	
 	}
 	
+	/**
+	 * Procura um funcionário pelo nome, informado na tela de busca.
+	 */
 	public void buscaPorNome(){
-		System.out.println("Vai buscar por: "+funcionarioSelecionado.getNome());
+	
 		FuncionarioRN funcRN = new FuncionarioRN();
 		listaFuncionarioPorNome = funcRN.buscarPorNome(funcionarioSelecionado.getNome());
-		if(listaFuncionarioPorNome.isEmpty()) System.out.println("Funcionário não existe");
-		else
-			for(Funcionario f:listaFuncionarioPorNome)
-			{
-				System.out.println(f.getNome());
-			}
+		if(listaFuncionarioPorNome.isEmpty()) Mensagens.adicionarMensagemErro("O funcionário "+funcionarioSelecionado.getNome()+" Não Existe");
 		
 		funcionario = new Funcionario();
-		funcionarioSelecionado = new Funcionario();
-		
+		funcionarioSelecionado = new Funcionario();		
 	}
 	
-	public String getHoraMontada(){
-		if (quadroHorario.getIdQuadroHorarios() == null) return "Selecione";
-		else return quadroHorario.getIdQuadroHorarios().toString();
-	}
-	
+	/*
+	 * Getters e Setters
+	 */
 	
 	public QuadroHorarios getQuadroHorario() {
 		return quadroHorario;
@@ -151,9 +156,5 @@ public class FuncionarioBean {
 
 	public void setListaFuncionarioPorNome(List<Funcionario> listaFuncionarioPorNome) {
 		this.listaFuncionarioPorNome = listaFuncionarioPorNome;
-	}
-	
-	
-	
-	
+	}	
 }

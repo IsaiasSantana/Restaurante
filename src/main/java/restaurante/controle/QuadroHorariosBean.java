@@ -11,7 +11,14 @@ import restaurante.util.Mensagens;
 
 @ManagedBean
 @RequestScoped
+
+/**
+ * 
+ * @author IsaíasSantana
+ *
+ */
 public class QuadroHorariosBean {
+	
 	private QuadroHorarios quadroHorarios;
 	private List<QuadroHorarios> quadroHorariosList;
 	private QuadroHorariosRN quadroHorarioRN;
@@ -29,8 +36,10 @@ public class QuadroHorariosBean {
 		this.quadroHorarios = quadroHorarios;
 	}
 	
-	
-	
+	/**
+	 * 
+	 * @return uma lista com todos os quadros de horários disponíveis.
+	 */
 	public List<QuadroHorarios> getQuadroHorariosList() {
 		if(quadroHorariosList == null) quadroHorariosList = quadroHorarioRN.listarQuadroDeHorarios();
 		return quadroHorariosList;
@@ -39,13 +48,15 @@ public class QuadroHorariosBean {
 	public void setQuadroHorariosList(List<QuadroHorarios> quadroHorariosList) {
 		this.quadroHorariosList = quadroHorariosList;
 	}
-
+	
+	/**
+	 * Salva um novo quadro de horário.
+	 * @return retorna null para permanecer na mesma página.
+	 */
 	public String salvar()
 	{
 		if(this.quadroHorarios != null)
 		{
-			System.out.println("Hora de chegada: "+   this.quadroHorarios.getHoraDeChegada().getHours()+":"+quadroHorarios.getHoraDeChegada().getMinutes()+":"+quadroHorarios.getHoraDeChegada().getSeconds());
-			System.out.println("Hora de saída: "+     this.quadroHorarios.getHoraDeSaida().getHours()+":"+quadroHorarios.getHoraDeChegada().getMinutes()+":"+quadroHorarios.getHoraDeChegada().getSeconds());
 			quadroHorarioRN.salvar(quadroHorarios);
 			Mensagens.adicionarMensagemConfirmacao("Quadro de horário cadastrado");
 			this.quadroHorarios = new QuadroHorarios();
@@ -53,5 +64,4 @@ public class QuadroHorariosBean {
 		}
 		return null;
 	}
-	
 }

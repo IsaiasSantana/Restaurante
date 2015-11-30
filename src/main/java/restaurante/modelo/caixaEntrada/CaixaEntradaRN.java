@@ -11,6 +11,7 @@ import restaurante.util.DAOFactory;
  *
  */
 public class CaixaEntradaRN {
+	
 	private CaixaEntradaDAO caixaEntDAO;
 	
 	public CaixaEntradaRN(){

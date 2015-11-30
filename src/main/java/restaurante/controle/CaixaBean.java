@@ -10,6 +10,7 @@ import javax.faces.model.SelectItemGroup;
 
 import restaurante.modelo.caixa.Caixa;
 import restaurante.modelo.caixa.CaixaRN;
+import restaurante.modelo.caixaEntrada.CaixaEntradaRN;
 import restaurante.modelo.funcionario.Funcionario;
 import restaurante.util.Mensagens;
 
@@ -40,38 +41,6 @@ public class CaixaBean {
 		funcionarioResponsavel = new Funcionario();
 	}
 
-	public double getTotalEntrada() {
-		return totalEntrada;
-	}
-
-	public double getTotalSaida() {
-		return totalSaida;
-	}
-
-	public Funcionario getFuncionarioResponsavel() {
-		return funcionarioResponsavel;
-	}
-
-	public void setFuncionarioResponsavel(Funcionario funcionarioResponsavel) {
-		this.funcionarioResponsavel = funcionarioResponsavel;
-	}
-
-	public Caixa getCaixa() {
-		return caixa;
-	}
-
-	public void setCaixa(Caixa caixa) {
-		this.caixa = caixa;
-	}
-
-	public List<Caixa> getCaixas() {
-		return caixas;
-	}
-
-	public void setCaixas(List<Caixa> caixas) {
-		this.caixas = caixas;
-	}
-	
 	
 	/**
 	 * 
@@ -107,6 +76,10 @@ public class CaixaBean {
 		return gerentes;
 	}
 	
+	/**
+	 * Salva um caixa no banco. Se já existir um caixa cadastrado, uma mensagem de erro será mostrada
+	 * Indicando que já existe um caixa para o restaurante.
+	 */
 	public void salvar(){
 		if(caixa.getIdCaixa() != null){
 			if(funcionarioResponsavel != null){
@@ -114,9 +87,16 @@ public class CaixaBean {
 				caixa.setResponsavelFechamento(funcionarioResponsavel);
 			}
 			try{
-				CaixaRN caixaRN = new CaixaRN();
-				caixaRN.inserir(caixa);
-				Mensagens.adicionarMensagemConfirmacao("Caixa cadastrado com sucesso!");
+				final CaixaEntradaRN cer = new CaixaEntradaRN();
+				List<Caixa> caixaBanco = cer.caixas();
+				if(caixaBanco.isEmpty())
+				{
+					CaixaRN caixaRN = new CaixaRN();
+					caixaRN.inserir(caixa);
+					Mensagens.adicionarMensagemConfirmacao("Caixa cadastrado com sucesso!");
+				}
+				else Mensagens.adicionarMensagemErro("Já existe um caixa cadastrado chamado "+caixaBanco.get(0).getIdCaixa());
+				
 			}
 			catch(Exception e){
 				Mensagens.adicionarMensagemConfirmacao("Não foi possível cadastrar o caixa");
@@ -138,4 +118,39 @@ public class CaixaBean {
 		totalSaida = valores[1];
 	}
 	
+	/*
+	 * Getters e Setters
+	 */
+	
+	public double getTotalEntrada() {
+		return totalEntrada;
+	}
+
+	public double getTotalSaida() {
+		return totalSaida;
+	}
+
+	public Funcionario getFuncionarioResponsavel() {
+		return funcionarioResponsavel;
+	}
+
+	public void setFuncionarioResponsavel(Funcionario funcionarioResponsavel) {
+		this.funcionarioResponsavel = funcionarioResponsavel;
+	}
+
+	public Caixa getCaixa() {
+		return caixa;
+	}
+
+	public void setCaixa(Caixa caixa) {
+		this.caixa = caixa;
+	}
+
+	public List<Caixa> getCaixas() {
+		return caixas;
+	}
+
+	public void setCaixas(List<Caixa> caixas) {
+		this.caixas = caixas;
+	}	
 }

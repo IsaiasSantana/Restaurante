@@ -18,6 +18,7 @@ import restaurante.modelo.funcionario.Funcionario;
 @ManagedBean
 @ApplicationScoped
 public class CaixaEntradaBean {
+	
 	private CaixaEntrada caixaEntrada;
 	private Caixa caixa;
 	private Funcionario funcionarioResponsavel;
@@ -28,19 +29,13 @@ public class CaixaEntradaBean {
 		funcionarioResponsavel = new Funcionario();
 	}
 	
-	
-
 	public Funcionario getFuncionarioResponsavel() {
 		return funcionarioResponsavel;
 	}
 
-
-
 	public void setFuncionarioResponsavel(Funcionario funcionarioResponsavel) {
 		this.funcionarioResponsavel = funcionarioResponsavel;
 	}
-
-
 
 	public CaixaEntrada getCaixaEntrada() {
 		return caixaEntrada;
@@ -71,14 +66,14 @@ public class CaixaEntradaBean {
 		this.funcionarioResponsavel = funcionario;
 	}
 	
+	/**
+	 * Salva uma entrada de dinheiro no caixa.
+	 */
 	public void salvar()
 	{
 		CaixaEntradaRN cERN = new CaixaEntradaRN();
 		caixaEntrada.setCaixa(caixa);
-		//caixaEntrada.setResponsavel(funcionarioResponsavel);
 		cERN.cadastradaEntradaCaixa(caixaEntrada);
-		System.out.println(caixa.getIdCaixa()+" ID IDIDIDIDI CAIA");
-		System.out.println(funcionarioResponsavel.getIdFuncionario());
 	}
 	
 }

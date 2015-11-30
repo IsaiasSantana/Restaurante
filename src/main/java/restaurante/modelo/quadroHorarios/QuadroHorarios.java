@@ -29,24 +29,31 @@ public class QuadroHorarios implements Serializable{
 	private Date horaDeChegada;
 	@Temporal(TemporalType.TIME)
 	private Date horaDeSaida;
+	
 	public Integer getIdQuadroHorarios() {
 		return idQuadroHorarios;
 	}
+	
 	public void setIdQuadroHorarios(Integer idQuadroHorarios) {
 		this.idQuadroHorarios = idQuadroHorarios;
 	}
+	
 	public Date getHoraDeChegada() {
 		return horaDeChegada;
 	}
+	
 	public void setHoraDeChegada(Date horaDeChegada) {
 		this.horaDeChegada = horaDeChegada;
 	}
+	
 	public Date getHoraDeSaida() {
 		return horaDeSaida;
 	}
+	
 	public void setHoraDeSaida(Date horaDeSaida) {
 		this.horaDeSaida = horaDeSaida;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -56,6 +63,7 @@ public class QuadroHorarios implements Serializable{
 		result = prime * result + ((idQuadroHorarios == null) ? 0 : idQuadroHorarios.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -86,8 +94,5 @@ public class QuadroHorarios implements Serializable{
 	public String toString() {
 		return "QuadroHorarios [idQuadroHorarios=" + idQuadroHorarios + ", horaDeChegada=" + horaDeChegada
 				+ ", horaDeSaida=" + horaDeSaida + "]";
-	}
-	
-	
-		
+	}	
 }
