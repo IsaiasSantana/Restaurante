@@ -44,6 +44,7 @@ public class LoteDAOHibernate implements LoteDAO{
 	public List<Lote> listarLotes() {
 		// TODO Auto-generated method stub
 		Query querySql = this.session.createSQLQuery("select * from lote order by idLote asc").addEntity(Lote.class);
+		@SuppressWarnings("unchecked")
 		List<Lote> lista = querySql.list();
 		return lista;
 	}

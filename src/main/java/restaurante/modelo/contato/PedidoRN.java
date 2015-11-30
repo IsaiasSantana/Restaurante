@@ -4,7 +4,6 @@ import java.util.List;
 
 import restaurante.modelo.pedido.Pedido;
 import restaurante.modelo.pedido.PedidoDAO;
-import restaurante.modelo.produto.Produto;
 import restaurante.util.DAOFactory;
 
 public class PedidoRN {

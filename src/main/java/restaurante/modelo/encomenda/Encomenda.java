@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import restaurante.modelo.fornecedor.Fornecedor;
@@ -36,15 +36,15 @@ public class Encomenda implements Serializable{
 	@GeneratedValue
 	private Integer idEncomenda;
 	
-	@ManyToOne 
+	@OneToOne 
 	private Funcionario funcionario;	
 	
 	
-	@ManyToOne
+	@OneToOne
 	private Fornecedor fornecedor;
 	
 	@OneToMany(mappedBy = "encomenda", targetEntity = Lote.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Lote> listaLotes; // o mapeamento deve ser assim.	
+	private List<Lote> listaLotes; 
 	
 	
 	private Boolean chegada;

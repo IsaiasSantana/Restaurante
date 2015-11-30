@@ -3,7 +3,6 @@ package restaurante.modelo.comanda;
 import java.util.List;
 
 import org.hibernate.Query;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import restaurante.modelo.pedido.Pedido;
@@ -43,6 +42,7 @@ public class ComandaDAOHibernate implements ComandaDAO{
 	@Override
 	public List<Comanda> listar() {
 		Query querySql = this.session.createSQLQuery("select * from comanda order by idComanda asc").addEntity(Comanda.class);
+		@SuppressWarnings("unchecked")
 		List<Comanda> lista = querySql.list();
 		return lista;
 	}
@@ -50,6 +50,7 @@ public class ComandaDAOHibernate implements ComandaDAO{
 	@Override
 	public List<Comanda> listarAtivas() {
 		Query querySql = this.session.createSQLQuery("select * from comanda where comandaInativa = false").addEntity(Comanda.class);
+		@SuppressWarnings("unchecked")
 		List<Comanda> lista = querySql.list();
 		return lista;
 	}
@@ -57,6 +58,7 @@ public class ComandaDAOHibernate implements ComandaDAO{
 	@Override
 	public List<Comanda> listarInativas() {
 		Query querySql = this.session.createSQLQuery("select * from comanda where comandaInativa = true").addEntity(Comanda.class);
+		@SuppressWarnings("unchecked")
 		List<Comanda> lista = querySql.list();
 		return lista;
 	}

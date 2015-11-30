@@ -7,7 +7,7 @@
 	<ui:define name="conteudo">
 		<h:form>
 			<h:outputStylesheet library="css" name="style.css" />
-			<h:inputHidden value="#{itemBean.item.idItem}"/>
+			<h:inputHidden value="#{encomendaBean.encomenda.idEncomenda}"/>
 			<aside class="menu_gerente">
 				<h3>Olá Greedo!</h3>
 				<h4>O que deseja fazer?</h4>
@@ -45,67 +45,36 @@
 				</table>
 			</aside>
 			<main>
-			<h2>Listar Itens</h2>
+			<h2>Listar Retiradas</h2>
 			<section class="pedido">
 				<p:messages />
-				<p:dataTable id="listarItem"
-					value="#{itemBean.listaItem}" var="item"
-					emptyMessage="Nenhum item encontrado.">
+				<p:dataTable id="listaRetiradas"
+					value="#{retiradaItemBean.listaRetiradas}" 
+					emptyMessage="Nenhum registro de retirada encontrado." var="retiradas">
 					<f:facet name="header">
-         			 	Lista de Itens 
-      			 </f:facet>
-					<p:column headerText="Código">
-						<h:outputText value="#{item.idItem}" />
+         			 	Lista de Retiradas 
+      			 	</f:facet>
+      			 
+					<p:column headerText= "Código">
+						<h:outputText value="#{retiradas.itemRetirado.idItem}" />
 					</p:column>
 					
-					<p:column headerText="Item">
-						<h:outputText value="#{item.nomeItem}" />
+					<p:column headerText= "Item">
+						<h:outputText value="#{retiradas.itemRetirado.nomeItem}" />
 					</p:column>
 					
-					<p:column headerText="Tipo">
-						<h:outputText value="#{item.tipoItem}" />
-					</p:column>
-					
+			
 					<p:column headerText="Quantidade">
-						<h:outputText value="#{item.quantidade}" />
+						<h:outputText value="#{retiradas.qtdRetirada}" />
 					</p:column>
 					
-					<p:column headerText="Status">
-						<h:outputText value="#{item.getStatusItem()}" />
+					<p:column headerText= "Responsavel">
+						<h:outputText value="#{retiradas.responsavelRetirada.nome}" />
 					</p:column>
-					
-					<p:column headerText="Alterar">
-						<p:commandButton action="#{itemBean.editar}" icon="ui-icon-arrowrefresh-1-e" title="Alterar item"  process="@form"
-							update="@form">
-							<f:setPropertyActionListener value="#{item}"
-								target="#{itemBean.item}" />					   
-						</p:commandButton>
-					</p:column>
-					
-					<p:column headerText="Excluir">
-						<p:commandButton icon="ui-icon-trash" title="Excluir item" 
-							action="#{itemBean.excluir()}" process="@form"
-							update="@form">
-							<f:setPropertyActionListener value="#{item}"
-								target="#{itemBean.itemSelecionado}" />
-
-							<p:confirm header="Exclusão de item"
-								message="Tem certeza que deseja excluir o fornecedor?"
-								icon="ui-icon-alert">
-							</p:confirm>
-
-						</p:commandButton>
-					</p:column>
-					
-						
+				
 				</p:dataTable>
 				
-				<p:confirmDialog global="true">
-					<p:commandButton value="Sim" type="button"
-						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="Nao" type="button"
-						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-				</p:confirmDialog>
+				
 			</section>
 			</main>
 

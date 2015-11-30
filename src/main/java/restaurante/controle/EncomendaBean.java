@@ -2,7 +2,6 @@ package restaurante.controle;
 
 
 import java.io.IOException;
-//import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,10 +23,15 @@ import restaurante.modelo.lote.LoteRN;
 
 import restaurante.util.Mensagens;
 
+/**
+ * 
+ * @author IsaíasSantana
+ *
+ */
 @ManagedBean (name = "encomendaBean")
 @RequestScoped
-
 public class EncomendaBean {
+	
 	private Encomenda encomenda;
 	private Encomenda encomendaSelecionada;
 	private Lote loteSelecionado;
@@ -47,19 +51,6 @@ public class EncomendaBean {
 	private List<Fornecedor> listaFornecedor;
 	private Integer quantidade;
 	private Date validade;	
-	
-	
-	
-	
-	
-	public Lote getLoteSelecionado() {
-		return loteSelecionado;
-	}
-
-	public void setLoteSelecionado(Lote loteSelecionado) {
-		this.loteSelecionado = loteSelecionado;
-	}
-
 
 	public EncomendaBean(){
 		this.encomenda = new Encomenda();
@@ -75,6 +66,118 @@ public class EncomendaBean {
 		this.item = new Item();
 		this.listaItem = new ArrayList<Item>();
 		this.validade = new Date();
+	}
+	
+
+	/**
+	 * Salva uma encomenda
+	 * @return retorna uma string para a listagem de encomendas
+	 */
+	public String salvarEncomenda(){
+		
+		if(this.encomenda !=null){
+			
+			//puxa o respectivo fornecedor que entrega a encomenda 
+           	for(Fornecedor fornecedor : listaFornecedor){
+            	if(fornecedor.getIdFornecedor().equals(this.idFornecedor)){
+            		this.fornecedor = fornecedor;
+            	}
+            }
+           	
+           	this.encomenda.setFornecedor(fornecedor);
+           	
+           	//puxa o respectivo funcionario que fez a encomenda
+           	for(Funcionario responsavel : listaFuncionario){
+            	if(responsavel.getIdFuncionario().equals(idFuncionario)){
+            		this.funcionario = responsavel;
+            	}
+            }
+           	
+           	this.encomenda.setFuncionario(funcionario);
+           	
+           	this.listaLote.add(lote);
+           	this.encomenda.setListaLotes(listaLote);
+           	this.lote.setEncomenda(encomenda);	
+           	this.encomenda.setChegada(false);
+         
+        	this.lote.setChegada(this.encomenda.getChegada());
+        	        	
+        	for(Item item : listaItem){
+            	if(item.getIdItem().equals(idItem)){
+            		this.item = item;
+            	}
+            }
+        	
+        	this.lote.setItem(item); 
+        
+           	LoteRN loteRN = new LoteRN();
+           	loteRN.salvar(lote);
+           	EncomendaRN encomendaRN = new EncomendaRN();
+           	encomendaRN.salvar(encomenda);
+           	
+			Mensagens.adicionarMensagemConfirmacao("Encomenda cadastrada com sucesso");
+			this.encomenda = new Encomenda();
+			this.lote = new Lote();
+			this.listaLote = new ArrayList<Lote>();
+			this.listaItem = new ArrayList<Item>();
+		}
+		return "listarEncomenda";
+	}
+	
+	/**
+	 * Altera o status de chegada de uma encomenda quando esta chega ao restaurante
+	 * @return
+	 */
+	public String marcarChegada(){
+		
+		this.lote.setChegada(true);
+		this.loteSelecionado.getEncomenda().setChegada(this.lote.getChegada());
+		this.listaEncomenda.removeAll(listaEncomenda);
+		this.listaLote.removeAll(listaLote);
+		Mensagens.adicionarMensagemConfirmacao("Encomenda foi marcada como entregue");
+		return null;
+	}
+	
+	/**
+	 * Lista todas a encomendas
+	 * @return uma string representando a url da página de listagem de encomendas.
+	 */
+	public String listarEncomendaJSF(){	
+		try {
+			
+			FacesContext.getCurrentInstance().getExternalContext().redirect("listarEncomenda");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "/listarEncomenda";
+	}
+	
+	/**
+	 * Exclui uma determinada encomenda
+	 */
+	public void excluirEncomenda(){
+		
+		EncomendaRN encomendaRN = new EncomendaRN();
+		try {
+			//pega o lote recupera o id da encomenda que ele está associado e apaga essa encomenda	
+			encomendaRN.excluir(encomendaRN.carregar(loteSelecionado.getEncomenda().getIdEncomenda()));
+			Mensagens.adicionarMensagemConfirmacao("Encomenda excluida");	
+		} 
+		catch (Exception e) {
+			Mensagens.adicionarMensagemErro("Não foi possivel excluir a encomenda");	
+		}	
+	}
+	
+	/*
+	 * Getters e Setters
+	 */
+
+	public Lote getLoteSelecionado() {
+		return loteSelecionado;
+	}
+
+	public void setLoteSelecionado(Lote loteSelecionado) {
+		this.loteSelecionado = loteSelecionado;
 	}
 	
 	
@@ -270,117 +373,5 @@ public class EncomendaBean {
 	
 	public void setEncomendaSelecionada(Encomenda encomendaSelecionada) {
 		this.encomendaSelecionada = encomendaSelecionada;
-	}
-
-	
-	public String salvarEncomenda(){
-		
-		if(this.encomenda !=null){
-			
-			//puxa o respectivo fornecedor que entrega a encomenda 
-           	for(Fornecedor fornecedor : listaFornecedor){
-            	if(fornecedor.getIdFornecedor().equals(this.idFornecedor)){
-            		this.fornecedor = fornecedor;
-            	}
-            }
-           	
-           	this.encomenda.setFornecedor(fornecedor);
-           	
-           	//puxa o respectivo funcionario que fez a encomenda
-           	for(Funcionario responsavel : listaFuncionario){
-            	if(responsavel.getIdFuncionario().equals(idFuncionario)){
-            		this.funcionario = responsavel;
-            	}
-            }
-           	
-           	this.encomenda.setFuncionario(funcionario);
-           	
-           	this.listaLote.add(lote);
-           	this.encomenda.setListaLotes(listaLote);
-           	this.lote.setEncomenda(encomenda);	
-           	this.encomenda.setChegada(false);
-         
-        	this.lote.setChegada(this.encomenda.getChegada());
-        	        	
-        	for(Item item : listaItem){
-            	if(item.getIdItem().equals(idItem)){
-            		this.item = item;
-            	}
-            }
-        	
-        	this.lote.setItem(item); 
-      
-           	//this.lote.setQntdItens(quantidade);
-        	
-           	//this.lote.setValidade(validade);
-       	
-           	LoteRN loteRN = new LoteRN();
-           	loteRN.salvar(lote);
-           	EncomendaRN encomendaRN = new EncomendaRN();
-           	encomendaRN.salvar(encomenda);
-           	
-			Mensagens.adicionarMensagemConfirmacao("Encomenda cadastrada com sucesso");
-			this.encomenda = new Encomenda();
-			this.lote = new Lote();
-			this.listaLote = new ArrayList<Lote>();
-			this.listaItem = new ArrayList<Item>();
-		}
-		return "listarEncomenda";
-		
-	}
-	
-	
-public String marcarChegada(){
-		
-		this.encomenda.setChegada(true);
-		
-		EncomendaRN encomendaRN = new EncomendaRN();
-		encomendaRN.salvar(this.encomenda);
-		Mensagens.adicionarMensagemConfirmacao("Encomenda foi marcada como entregue");
-		return null;
-	}
-	
-
-	public String listarEncomendaJSF(){	
-		try {
-			
-			FacesContext.getCurrentInstance().getExternalContext().redirect("listarEncomenda");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return "/listarEncomenda";
-	}
-	
-
-	
-	public void excluirEncomenda(){
-		
-		EncomendaRN encomendaRN = new EncomendaRN();
-		//LoteRN loteRN = new LoteRN();
-		
-		try {
-			//Seu erro aqui era que você estava tentando excluir um lote em vez de uma encomenda.
-			//Por causa da listagem de encomendas, que na verdade estava listando os lotes e você tava tentando apagar o lote. ao invés da encomenda.
-			//O que fiz foi, pegar esse lote e recuperar o id da encomenda que ele está associado e apagar essa encomenda
-			//Como já tinha um método pra recuperar a encomenda a parti de seu id, só fiz usa-lo como mostra a linha abaixo.
-			encomendaRN.excluir(encomendaRN.carregar(loteSelecionado.getEncomenda().getIdEncomenda()));
-			//loteRN.excluir(loteSelecionado);
-			Mensagens.adicionarMensagemConfirmacao("Encomenda excluida");	
-			
-		} 
-		
-		catch (Exception e) {
-			Mensagens.adicionarMensagemErro("Não foi possivel excluir a encomenda");	
-		}
-		
-		
-
-	}
-	
-	
-	
-	
-	
-	
-
+	}	
 }

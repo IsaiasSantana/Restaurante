@@ -44,6 +44,7 @@ public class ItemDAOHibernate implements ItemDAO {
 	public List<Item> listarItens() {
 		// TODO Auto-generated method stub
 		Query querySql = this.session.createSQLQuery("select * from item order by idItem asc").addEntity(Item.class);
+		@SuppressWarnings("unchecked")
 		List<Item> lista = querySql.list();
 		return lista;
 	}

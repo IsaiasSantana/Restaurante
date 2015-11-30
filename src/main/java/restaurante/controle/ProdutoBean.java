@@ -85,7 +85,7 @@ public class ProdutoBean{
 	public void setListaProduto(List<Produto> listaProduto) {
 		this.listaProduto = listaProduto;
 	}
-	//Método salvar2 criado para que após cadastro seja visualizado o cardápio
+	//Método salvar criado para que após cadastro seja visualizado o cardápio
 	//a página vai de cadastroProduto.jsf para cardapio.jsf
 	public String salvar(){
 		if(this.produto != null){

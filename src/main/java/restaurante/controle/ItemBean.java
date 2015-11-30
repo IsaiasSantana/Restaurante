@@ -24,6 +24,7 @@ import restaurante.util.Mensagens;
 @ManagedBean(name = "itemBean")
 @RequestScoped
 public class ItemBean {
+	
 	private Item item;
 	private Item itemSelecionado;
 	private List<Item> listaItem;
@@ -35,6 +36,7 @@ public class ItemBean {
 		this.listaItem =  new ArrayList<Item>();
 	}
 	
+	//Salva um novo item
 	public String salvar(){
 		String msg = null;
 		
@@ -64,7 +66,7 @@ public class ItemBean {
 	}
 	
 	
-
+	//Lista os itens salvos
 	public String listarItemJSF(){
 		
 		try {
@@ -77,6 +79,7 @@ public class ItemBean {
 	}
 	
 	
+	//Exclui um item
 	public void excluir(){
 		ItemRN itemRN = new ItemRN();
 		try {
@@ -94,14 +97,13 @@ public class ItemBean {
 	
 	public Item getItemSelecionado() {
 		return itemSelecionado;
+
 	}
 
 	public void setItemSelecionado(Item itemSelecionado) {
 		this.itemSelecionado = itemSelecionado;
 	}
 
-	
-	
 	public Item getItem() {
 		return item;
 	}
@@ -116,11 +118,7 @@ public class ItemBean {
 		return listaItem;
 	}
 	
-	public void setListaFornecedor(List<Item> listaItem) {
+	public void setListaItem(List<Item> listaItem) {
 		this.listaItem = listaItem;
 	}
-
-	
-	
-
 }

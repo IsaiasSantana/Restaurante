@@ -90,7 +90,14 @@ public class Item implements Serializable{
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-
+	
+	public String getStatusItem(){
+		if(quantidade>=40){
+			return "Abastecido";
+		}
+		return "Baixo Estoque";
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -2,7 +2,6 @@ package restaurante.modelo.pedido;
 
 import java.util.List;
 
-import restaurante.modelo.produto.Produto;
 import restaurante.util.DAOFactory;
 
 /**

@@ -75,14 +75,19 @@
 						<h:outputText value="#{lote.chegada}" />
 					</p:column>
 					
-					<!--  <p:column headerText="Alterar">
-						<p:commandButton action="#{loteBean.editar}" icon="ui-icon-arrowrefresh-1-e" title="Alterar item"  process="@form"
+					<p:column headerText="Marca Chegada">
+						<p:commandButton action="#{encomendaBean.marcarChegada}" icon="" title="Marcar chegada"  process="@form"
 							update="@form">
-							<f:setPropertyActionListener value="#{item}"
-								target="#{itemBean.item}" />
+							
+			
+							<f:setPropertyActionListener value="#{lote}"
+								target="#{encomendaBean.loteSelecionado}" />
+								
+								<f:setPropertyActionListener value="#{lote}"
+								target="#{encomendaBean.lote}" />
 									     
 						</p:commandButton>
-					</p:column> -->
+					</p:column>
 					
 					<p:column headerText="Excluir">
 						<p:commandButton value = "excluir" icon="ui-icon-trash" title="Excluir encomenda" 
@@ -91,12 +96,9 @@
 							
 							
 							  <f:setPropertyActionListener 
-								value="#{lote}" target="#{encomendaBean.loteSelecionado}"    /> <!-- Aqui mudei, a variável encomenda selecionada
+								value="#{lote}" target="#{encomendaBean.loteSelecionado}"    /> 
 								
-								por por essa de lote, porque se está listando é lotes e você estava tentando converter lote pra encomenda(impossivel)
-								
-								e o value estava assim value="#{encomenda}" sendo não existe essa variável aqui no dataTable -->
-								
+			
 			
 							<p:confirm header="Exclusão de Encomenda"
 								message="Tem certeza que deseja excluir a encomenda?"

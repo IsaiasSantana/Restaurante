@@ -78,14 +78,14 @@
 						<h:outputText value="#{lote.chegada}" />
 					</p:column>
 					
-					<!--  <p:column headerText="Alterar">
-						<p:commandButton action="#{loteBean.editar}" icon="ui-icon-arrowrefresh-1-e" title="Alterar item"  process="@form"
+					  <p:column headerText="Dar Baixa Item">
+						<p:commandButton action="#{loteBean.atualizaQuantidadeItens}" icon="" title="Dar baixa item"  process="@form"
 							update="@form">
-							<f:setPropertyActionListener value="#{item}"
-								target="#{itemBean.item}" />
+							<f:setPropertyActionListener value="#{lote}"
+								target="#{loteBean.loteSelecionado}" />
 									     
 						</p:commandButton>
-					</p:column> -->
+					</p:column> 
 					
 					<p:column headerText="Excluir">
 						<p:commandButton icon="ui-icon-trash" title="Excluir lote" 

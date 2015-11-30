@@ -52,6 +52,7 @@ public class ProdutoDAOHibernate implements ProdutoDAO{
 	@Override
 	public List<Produto> listar() {
 		Query querySql = this.session.createSQLQuery("select * from produto order by isRefeicao desc").addEntity(Produto.class);
+		@SuppressWarnings("unchecked")
 		List<Produto> lista = querySql.list();
 		return lista;
 	}
@@ -59,6 +60,7 @@ public class ProdutoDAOHibernate implements ProdutoDAO{
 	@Override
 	public List<Produto> listarRefeicao() {
 		Query querySql = this.session.createSQLQuery("select * from produto where isRefeicao = true").addEntity(Produto.class);
+		@SuppressWarnings("unchecked")
 		List<Produto> lista = querySql.list();
 		return lista;
 	}
@@ -66,6 +68,7 @@ public class ProdutoDAOHibernate implements ProdutoDAO{
 	@Override
 	public List<Produto> listarBebida() {
 		Query querySql = this.session.createSQLQuery("select * from produto  where isRefeicao = false").addEntity(Produto.class);
+		@SuppressWarnings("unchecked")
 		List<Produto> lista = querySql.list();
 		return lista;
 	}

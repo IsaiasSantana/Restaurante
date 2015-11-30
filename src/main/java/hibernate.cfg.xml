@@ -45,6 +45,7 @@
 		<mapping class="restaurante.modelo.caixaEntrada.CaixaEntrada"/>
 		<mapping class="restaurante.modelo.caixaRetirada.CaixaRetirada"/>	
 		<mapping class="restaurante.modelo.encomenda.Encomenda"/>
+		<mapping class="restaurante.modelo.retiradaitem.RetiradaItem"/>
 		
 	</session-factory>
 </hibernate-configuration>
